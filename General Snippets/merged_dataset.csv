@@ -1,0 +1,666 @@
+User Command,Exact Command,Argument,Natural Language Command,Main Command
+open Chrome,open application Chrome,none,,
+,,discord,i need you to execute discord,open application
+,,spotify,i need you to execute spotify,open application
+,,photoshop,restart photoshop for me,restart application
+,,discord,open discord,open application
+,,matlab,please reboot matlab,restart application
+,,slack,i need you to reboot slack,restart application
+,,notepad,i need you to relaunch notepad,restart application
+,,outlook,execute outlook,open application
+,,photoshop,can you exit photoshop,close application
+,,chrome,reboot chrome for me,restart application
+,,discord,i need you to restart discord,restart application
+,,slack,please reboot slack,restart application
+,,excel,restart excel for me,restart application
+,,firefox,please shut down firefox,close application
+,,chrome,relaunch chrome,restart application
+,,firefox,please boot up firefox,open application
+,,photoshop,please relaunch photoshop,restart application
+,,slack,execute slack,open application
+,,word,open word,open application
+,,chrome,end chrome for me,close application
+,,word,can you relaunch word,restart application
+,,discord,restart discord for me,restart application
+,,photoshop,can you reload photoshop,restart application
+,,powerpoint,terminate powerpoint for me,close application
+,,outlook,i need you to restart outlook,restart application
+,,photoshop,execute photoshop,open application
+,,spotify,can you start spotify,open application
+,,matlab,quit matlab,close application
+,,notepad,restart notepad,restart application
+,,excel,please start excel,open application
+,,notepad,can you launch notepad,open application
+,,powerpoint,i need you to reload powerpoint,restart application
+,,excel,can you quit excel,close application
+,,excel,launch excel,open application
+,,excel,restart excel,restart application
+,,zoom,can you start zoom,open application
+,,zoom,can you exit zoom,close application
+,,skype,can you quit skype,close application
+,,outlook,launch outlook,open application
+,,zoom,can you run zoom,open application
+,,chrome,i need you to terminate chrome,close application
+,,outlook,please end outlook,close application
+,,outlook,i need you to boot up outlook,open application
+,,discord,execute discord,open application
+,,outlook,please relaunch outlook,restart application
+,,firefox,please reboot firefox,restart application
+,,word,i need you to open word,open application
+,,spotify,run spotify,open application
+,,skype,can you launch skype,open application
+,,firefox,i need you to terminate firefox,close application
+,,firefox,boot up firefox for me,open application
+,,outlook,start outlook,open application
+,,firefox,execute firefox for me,open application
+,,chrome,relaunch chrome for me,restart application
+,,word,can you start word,open application
+,,notepad,can you execute notepad,open application
+,,slack,please execute slack,open application
+,,vscode,i need you to execute vscode,open application
+,,photoshop,can you reboot photoshop,restart application
+,,powerpoint,i need you to run powerpoint,open application
+,,word,boot up word,open application
+,,photoshop,quit photoshop,close application
+,,powerpoint,please boot up powerpoint,open application
+,,slack,can you reboot slack,restart application
+,,spotify,i need you to open spotify,open application
+,,matlab,shut down matlab,close application
+,,firefox,terminate firefox for me,close application
+,,photoshop,reboot photoshop for me,restart application
+,,powerpoint,boot up powerpoint for me,open application
+,,slack,boot up slack,open application
+,,spotify,please restart spotify,restart application
+,,matlab,i need you to restart matlab,restart application
+,,photoshop,end photoshop,close application
+,,zoom,please reboot zoom,restart application
+,,slack,please exit slack,close application
+,,outlook,can you shut down outlook,close application
+,,matlab,start matlab for me,open application
+,,firefox,please reload firefox,restart application
+,,word,reboot word,restart application
+,,zoom,i need you to exit zoom,close application
+,,matlab,reboot matlab for me,restart application
+,,zoom,restart zoom,restart application
+,,firefox,please open firefox,open application
+,,word,please reboot word,restart application
+,,firefox,i need you to execute firefox,open application
+,,firefox,please end firefox,close application
+,,zoom,reboot zoom,restart application
+,,word,i need you to quit word,close application
+,,firefox,can you reboot firefox,restart application
+,,powerpoint,quit powerpoint,close application
+,,excel,open excel,open application
+,,powerpoint,can you close powerpoint,close application
+,,photoshop,i need you to run photoshop,open application
+,,photoshop,reload photoshop for me,restart application
+,,word,i need you to exit word,close application
+,,discord,start discord,open application
+,,discord,terminate discord,close application
+,,vscode,i need you to reboot vscode,restart application
+,,spotify,i need you to launch spotify,open application
+,,slack,can you close slack,close application
+,,spotify,open spotify for me,open application
+,,excel,please launch excel,open application
+,,photoshop,start photoshop,open application
+,,powerpoint,please reboot powerpoint,restart application
+,,skype,restart skype for me,restart application
+,,notepad,terminate notepad for me,close application
+,,excel,can you boot up excel,open application
+,,photoshop,run photoshop,open application
+,,powerpoint,run powerpoint for me,open application
+,,skype,can you restart skype,restart application
+,,zoom,please reload zoom,restart application
+,,photoshop,please close photoshop,close application
+,,zoom,i need you to relaunch zoom,restart application
+,,word,please launch word,open application
+,,photoshop,i need you to shut down photoshop,close application
+,,firefox,exit firefox for me,close application
+,,chrome,reload chrome for me,restart application
+,,slack,can you run slack,open application
+,,chrome,close chrome,close application
+,,outlook,run outlook for me,open application
+,,photoshop,relaunch photoshop,restart application
+,,spotify,please execute spotify,open application
+,,spotify,terminate spotify for me,close application
+,,powerpoint,restart powerpoint,restart application
+,,notepad,please run notepad,open application
+,,discord,please end discord,close application
+,,matlab,reload matlab for me,restart application
+,,outlook,please close outlook,close application
+,,matlab,run matlab,open application
+,,discord,please exit discord,close application
+,,photoshop,please reload photoshop,restart application
+,,firefox,please launch firefox,open application
+,,vscode,i need you to restart vscode,restart application
+,,zoom,relaunch zoom for me,restart application
+,,photoshop,reload photoshop,restart application
+,,excel,exit excel for me,close application
+,,excel,execute excel,open application
+,,notepad,relaunch notepad for me,restart application
+,,chrome,can you execute chrome,open application
+,,powerpoint,exit powerpoint for me,close application
+,,excel,please run excel,open application
+,,discord,i need you to run discord,open application
+,,word,i need you to reload word,restart application
+,,spotify,end spotify for me,close application
+,,vscode,reboot vscode for me,restart application
+,,powerpoint,please reload powerpoint,restart application
+,,slack,please launch slack,open application
+,,powerpoint,please end powerpoint,close application
+,,vscode,please start vscode,open application
+,,word,i need you to boot up word,open application
+,,matlab,quit matlab for me,close application
+,,outlook,end outlook,close application
+,,slack,can you reload slack,restart application
+,,notepad,i need you to reload notepad,restart application
+,,skype,boot up skype for me,open application
+,,word,can you restart word,restart application
+,,zoom,shut down zoom for me,close application
+,,powerpoint,boot up powerpoint,open application
+,,word,run word for me,open application
+,,skype,run skype for me,open application
+,,slack,can you end slack,close application
+,,outlook,i need you to terminate outlook,close application
+,,matlab,i need you to reload matlab,restart application
+,,outlook,please quit outlook,close application
+,,notepad,i need you to run notepad,open application
+,,notepad,end notepad for me,close application
+,,vscode,i need you to terminate vscode,close application
+,,photoshop,close photoshop,close application
+,,excel,end excel,close application
+,,discord,can you exit discord,close application
+,,outlook,please start outlook,open application
+,,vscode,can you shut down vscode,close application
+,,notepad,can you restart notepad,restart application
+,,powerpoint,please relaunch powerpoint,restart application
+,,notepad,please execute notepad,open application
+,,matlab,can you shut down matlab,close application
+,,word,can you end word,close application
+,,matlab,i need you to reboot matlab,restart application
+,,matlab,please close matlab,close application
+,,slack,please reload slack,restart application
+,,firefox,i need you to shut down firefox,close application
+,,notepad,i need you to terminate notepad,close application
+,,firefox,i need you to open firefox,open application
+,,notepad,i need you to boot up notepad,open application
+,,matlab,please reload matlab,restart application
+,,slack,i need you to close slack,close application
+,,vscode,please run vscode,open application
+,,firefox,reload firefox for me,restart application
+,,spotify,execute spotify for me,open application
+,,skype,i need you to run skype,open application
+,,excel,i need you to shut down excel,close application
+,,zoom,please run zoom,open application
+,,vscode,can you boot up vscode,open application
+,,vscode,i need you to close vscode,close application
+,,slack,i need you to restart slack,restart application
+,,firefox,can you terminate firefox,close application
+,,spotify,can you execute spotify,open application
+,,skype,i need you to reload skype,restart application
+,,skype,can you close skype,close application
+,,discord,can you launch discord,open application
+,,word,relaunch word,restart application
+,,outlook,launch outlook for me,open application
+,,discord,run discord,open application
+,,chrome,please open chrome,open application
+,,outlook,run outlook,open application
+,,photoshop,please terminate photoshop,close application
+,,word,can you boot up word,open application
+,,photoshop,please end photoshop,close application
+,,word,i need you to terminate word,close application
+,,outlook,exit outlook,close application
+,,matlab,exit matlab for me,close application
+,,discord,i need you to relaunch discord,restart application
+,,chrome,exit chrome,close application
+,,skype,i need you to quit skype,close application
+,,excel,start excel for me,open application
+,,skype,exit skype,close application
+,,powerpoint,quit powerpoint for me,close application
+,,photoshop,i need you to open photoshop,open application
+,,skype,please relaunch skype,restart application
+,,slack,quit slack for me,close application
+,,vscode,i need you to run vscode,open application
+,,outlook,please restart outlook,restart application
+,,zoom,i need you to reboot zoom,restart application
+,,firefox,can you launch firefox,open application
+,,matlab,can you relaunch matlab,restart application
+,,skype,please reboot skype,restart application
+,,word,can you quit word,close application
+,,skype,shut down skype,close application
+,,word,please open word,open application
+,,discord,i need you to shut down discord,close application
+,,excel,please end excel,close application
+,,matlab,i need you to run matlab,open application
+,,powerpoint,can you relaunch powerpoint,restart application
+,,firefox,please relaunch firefox,restart application
+,,skype,reload skype for me,restart application
+,,outlook,end outlook for me,close application
+,,discord,execute discord for me,open application
+,,slack,i need you to reload slack,restart application
+,,notepad,end notepad,close application
+,,matlab,can you execute matlab,open application
+,,excel,please boot up excel,open application
+,,word,terminate word,close application
+,,photoshop,please shut down photoshop,close application
+,,chrome,i need you to shut down chrome,close application
+,,skype,please run skype,open application
+,,powerpoint,close powerpoint for me,close application
+,,matlab,end matlab for me,close application
+,,powerpoint,execute powerpoint for me,open application
+,,zoom,reboot zoom for me,restart application
+,,notepad,please relaunch notepad,restart application
+,,excel,please reload excel,restart application
+,,skype,i need you to execute skype,open application
+,,chrome,i need you to start chrome,open application
+,,notepad,start notepad,open application
+,,matlab,start matlab,open application
+,,excel,can you launch excel,open application
+,,matlab,close matlab for me,close application
+,,photoshop,please open photoshop,open application
+,,vscode,please terminate vscode,close application
+,,matlab,can you reload matlab,restart application
+,,discord,open discord for me,open application
+,,chrome,please close chrome,close application
+,,vscode,relaunch vscode,restart application
+,,zoom,i need you to quit zoom,close application
+,,word,i need you to shut down word,close application
+,,excel,boot up excel,open application
+,,excel,reboot excel for me,restart application
+,,discord,please open discord,open application
+,,matlab,please terminate matlab,close application
+,,excel,please relaunch excel,restart application
+,,zoom,can you shut down zoom,close application
+,,excel,please open excel,open application
+,,notepad,i need you to execute notepad,open application
+,,firefox,please quit firefox,close application
+,,zoom,end zoom for me,close application
+,,vscode,shut down vscode for me,close application
+,,matlab,reload matlab,restart application
+,,discord,shut down discord,close application
+,,powerpoint,i need you to shut down powerpoint,close application
+,,spotify,execute spotify,open application
+,,outlook,please terminate outlook,close application
+,,vscode,can you close vscode,close application
+,,word,can you reboot word,restart application
+,,zoom,quit zoom,close application
+,,word,please reload word,restart application
+,,notepad,can you shut down notepad,close application
+,,skype,can you run skype,open application
+,,zoom,please launch zoom,open application
+,,spotify,i need you to boot up spotify,open application
+,,outlook,can you relaunch outlook,restart application
+,,excel,i need you to reload excel,restart application
+,,zoom,relaunch zoom,restart application
+,,word,i need you to restart word,restart application
+,,zoom,can you terminate zoom,close application
+,,vscode,reload vscode for me,restart application
+,,powerpoint,please execute powerpoint,open application
+,,notepad,boot up notepad,open application
+,,spotify,i need you to close spotify,close application
+,,excel,please reboot excel,restart application
+,,notepad,i need you to exit notepad,close application
+,,vscode,i need you to reload vscode,restart application
+,,chrome,please execute chrome,open application
+,,chrome,can you close chrome,close application
+,,outlook,can you terminate outlook,close application
+,,firefox,launch firefox for me,open application
+,,word,reload word,restart application
+,,notepad,open notepad for me,open application
+,,chrome,close chrome for me,close application
+,,matlab,please execute matlab,open application
+,,notepad,can you quit notepad,close application
+,,zoom,can you execute zoom,open application
+,,chrome,open chrome,open application
+,,word,please terminate word,close application
+,,zoom,please start zoom,open application
+,,skype,please execute skype,open application
+,,vscode,i need you to shut down vscode,close application
+,,matlab,can you restart matlab,restart application
+,,excel,please execute excel,open application
+,,notepad,can you exit notepad,close application
+,,notepad,i need you to close notepad,close application
+,,matlab,open matlab for me,open application
+,,word,can you run word,open application
+,,powerpoint,start powerpoint for me,open application
+,,powerpoint,can you restart powerpoint,restart application
+,,notepad,i need you to restart notepad,restart application
+,,vscode,boot up vscode,open application
+,,zoom,can you relaunch zoom,restart application
+,,matlab,please relaunch matlab,restart application
+,,outlook,shut down outlook for me,close application
+,,zoom,launch zoom for me,open application
+,,chrome,can you relaunch chrome,restart application
+,,outlook,boot up outlook for me,open application
+,,outlook,can you close outlook,close application
+,,word,launch word for me,open application
+,,spotify,close spotify for me,close application
+,,slack,quit slack,close application
+,,notepad,execute notepad,open application
+,,discord,please execute discord,open application
+,,slack,reboot slack,restart application
+,,powerpoint,shut down powerpoint for me,close application
+,,chrome,i need you to restart chrome,restart application
+,,discord,please run discord,open application
+,,zoom,terminate zoom for me,close application
+,,word,i need you to run word,open application
+,,excel,please restart excel,restart application
+,,spotify,i need you to run spotify,open application
+,,photoshop,shut down photoshop for me,close application
+,,spotify,quit spotify,close application
+,,vscode,can you end vscode,close application
+,,vscode,i need you to boot up vscode,open application
+,,skype,quit skype for me,close application
+,,outlook,relaunch outlook for me,restart application
+,,outlook,reload outlook,restart application
+,,zoom,i need you to reload zoom,restart application
+,,vscode,please quit vscode,close application
+,,chrome,i need you to execute chrome,open application
+,,skype,open skype for me,open application
+,,discord,i need you to launch discord,open application
+,,discord,please start discord,open application
+,,vscode,end vscode for me,close application
+,,skype,please launch skype,open application
+,,chrome,please relaunch chrome,restart application
+,,firefox,relaunch firefox,restart application
+,,excel,please shut down excel,close application
+,,matlab,please exit matlab,close application
+,,word,start word for me,open application
+,,powerpoint,can you reboot powerpoint,restart application
+,,powerpoint,restart powerpoint for me,restart application
+,,word,can you launch word,open application
+,,vscode,open vscode,open application
+,,slack,please restart slack,restart application
+,,excel,please exit excel,close application
+,,powerpoint,start powerpoint,open application
+,,notepad,relaunch notepad,restart application
+,,skype,run skype,open application
+,,excel,can you terminate excel,close application
+,,photoshop,terminate photoshop,close application
+,,discord,relaunch discord for me,restart application
+,,slack,launch slack for me,open application
+,,photoshop,please restart photoshop,restart application
+,,outlook,can you reboot outlook,restart application
+,,powerpoint,please close powerpoint,close application
+,,slack,end slack for me,close application
+,,photoshop,quit photoshop for me,close application
+,,discord,i need you to quit discord,close application
+,,word,end word,close application
+,,matlab,i need you to start matlab,open application
+,,outlook,can you run outlook,open application
+,,firefox,can you start firefox,open application
+,,zoom,i need you to boot up zoom,open application
+,,outlook,i need you to open outlook,open application
+,,matlab,launch matlab,open application
+,,vscode,i need you to quit vscode,close application
+,,firefox,execute firefox,open application
+,,slack,open slack for me,open application
+,,firefox,can you shut down firefox,close application
+,,vscode,can you restart vscode,restart application
+,,spotify,please close spotify,close application
+,,matlab,please end matlab,close application
+,,word,open word for me,open application
+,,slack,can you exit slack,close application
+,,zoom,i need you to launch zoom,open application
+,,slack,i need you to launch slack,open application
+,,excel,please quit excel,close application
+,,discord,i need you to reboot discord,restart application
+,,maximum,set brightness to maximum,adjust brightness
+,,10%,set volume to 10%,increase volume
+,,25%,change brightness to 25%,adjust brightness
+,,50%,change brightness to 50%,adjust brightness
+,,maximum,change brightness to maximum,adjust brightness
+,,none,reboot computer,reboot system
+,,30%,set volume to 30%,increase volume
+,,none,reboot system,reboot system
+,,none,restart pc,reboot system
+,,none,restart the computer,reboot system
+,,20%,volume 20%,increase volume
+,,60%,set volume to 60%,increase volume
+,,40%,volume 40%,increase volume
+,,maximum,adjust volume to maximum,increase volume
+,,100%,adjust volume to 100%,increase volume
+,,mute,change volume to mute,increase volume
+,,10%,adjust volume to 10%,increase volume
+,,25%,brightness 25%,adjust brightness
+,,75%,adjust screen to 75%,adjust brightness
+,,10%,volume 10%,increase volume
+,,minimum,adjust screen to minimum,adjust brightness
+,,75%,brightness 75%,adjust brightness
+,,100%,change volume to 100%,increase volume
+,,mute,adjust volume to mute,increase volume
+,,25%,adjust screen to 25%,adjust brightness
+,,75%,set brightness to 75%,adjust brightness
+,,minimum,brightness minimum,adjust brightness
+,,75%,change brightness to 75%,adjust brightness
+,,0%,adjust volume to 0%,increase volume
+,,90%,adjust volume to 90%,increase volume
+,,60%,volume 60%,increase volume
+,,mute,make it mute loud,increase volume
+,,75%,make screen 75% bright,adjust brightness
+,,50%,brightness 50%,adjust brightness
+,,maximum,volume maximum,increase volume
+,,70%,change volume to 70%,increase volume
+,,0%,volume 0%,increase volume
+,,maximum,adjust screen to maximum,adjust brightness
+,,maximum,make it maximum loud,increase volume
+,,25%,set brightness to 25%,adjust brightness
+,,none,system restart needed,reboot system
+,,minimum,change brightness to minimum,adjust brightness
+,,25%,make screen 25% bright,adjust brightness
+,,50%,make screen 50% bright,adjust brightness
+,,90%,change volume to 90%,increase volume
+,,90%,make it 90% loud,increase volume
+,,maximum,brightness maximum,adjust brightness
+,,50%,adjust volume to 50%,increase volume
+,,40%,set volume to 40%,increase volume
+,,20%,change volume to 20%,increase volume
+,,60%,change volume to 60%,increase volume
+,,20%,adjust volume to 20%,increase volume
+,,80%,set volume to 80%,increase volume
+,,maximum,make screen maximum bright,adjust brightness
+,,minimum,set brightness to minimum,adjust brightness
+,,90%,volume 90%,increase volume
+,,50%,change volume to 50%,increase volume
+,,50%,set brightness to 50%,adjust brightness
+,,maximum,set volume to maximum,increase volume
+,,60%,adjust volume to 60%,increase volume
+,,30%,make it 30% loud,increase volume
+,,10%,make it 10% loud,increase volume
+,,70%,volume 70%,increase volume
+,,80%,make it 80% loud,increase volume
+,,40%,make it 40% loud,increase volume
+,,30%,adjust volume to 30%,increase volume
+,,minimum,make screen minimum bright,adjust brightness
+,,50%,make it 50% loud,increase volume
+,,50%,adjust screen to 50%,adjust brightness
+,,70%,make it 70% loud,increase volume
+,,80%,change volume to 80%,increase volume
+,,mute,volume mute,increase volume
+,,0%,set volume to 0%,increase volume
+,,10%,change volume to 10%,increase volume
+,,100%,make it 100% loud,increase volume
+,,70%,set volume to 70%,increase volume
+,,40%,adjust volume to 40%,increase volume
+,,100%,volume 100%,increase volume
+,,70%,adjust volume to 70%,increase volume
+,,50%,volume 50%,increase volume
+,,60%,make it 60% loud,increase volume
+,,0%,change volume to 0%,increase volume
+,,0%,make it 0% loud,increase volume
+,,30%,change volume to 30%,increase volume
+,,80%,adjust volume to 80%,increase volume
+,,mute,set volume to mute,increase volume
+,,100%,set volume to 100%,increase volume
+,,20%,set volume to 20%,increase volume
+,,50%,set volume to 50%,increase volume
+,,90%,set volume to 90%,increase volume
+,,80%,volume 80%,increase volume
+,,book recommendations,i want to learn about book recommendations,web search
+,,recipe ideas,find recipe ideas online,web search
+,,coding tutorials,look up coding tutorials,web search
+,,latest news,find information about latest news,web search
+,,tech reviews,search the web for tech reviews,web search
+,,tech reviews,show me tech reviews,web search
+,,travel destinations,find travel destinations online,web search
+,,coding tutorials,find coding tutorials online,web search
+,,travel destinations,look up travel destinations,web search
+,,job listings,find job listings online,web search
+,,coding tutorials,show me coding tutorials,web search
+,,health tips,i want to learn about health tips,web search
+,,latest news,search the web for latest news,web search
+,,book recommendations,search for book recommendations,web search
+,,health tips,search the web for health tips,web search
+,,health tips,find information about health tips,web search
+,,job listings,search for job listings,web search
+,,stock market,show me stock market,web search
+,,book recommendations,find book recommendations online,web search
+,,stock market,i want to learn about stock market,web search
+,,job listings,i want to learn about job listings,web search
+,,travel destinations,i want to learn about travel destinations,web search
+,,latest news,find latest news online,web search
+,,travel destinations,search for travel destinations,web search
+,,travel destinations,show me travel destinations,web search
+,,coding tutorials,search the web for coding tutorials,web search
+,,local restaurants,search for local restaurants,web search
+,,weather forecast,show me weather forecast,web search
+,,movie reviews,search for movie reviews,web search
+,,recipe ideas,search the web for recipe ideas,web search
+,,weather forecast,find information about weather forecast,web search
+,,movie reviews,find movie reviews online,web search
+,,movie reviews,look up movie reviews,web search
+,,latest news,i want to learn about latest news,web search
+,,latest news,show me latest news,web search
+,,travel destinations,search the web for travel destinations,web search
+,,health tips,look up health tips,web search
+,,ai tutorials,find information about ai tutorials,web search
+,,weather forecast,i want to learn about weather forecast,web search
+,,local restaurants,find information about local restaurants,web search
+,,coding tutorials,i want to learn about coding tutorials,web search
+,,travel destinations,find information about travel destinations,web search
+,,stock market,search the web for stock market,web search
+,,recipe ideas,search for recipe ideas,web search
+,,local restaurants,show me local restaurants,web search
+,,ai tutorials,search for ai tutorials,web search
+,,ai tutorials,show me ai tutorials,web search
+,,recipe ideas,look up recipe ideas,web search
+,,book recommendations,search the web for book recommendations,web search
+,,book recommendations,show me book recommendations,web search
+,,stock market,find stock market online,web search
+,,book recommendations,look up book recommendations,web search
+,,recipe ideas,find information about recipe ideas,web search
+,,weather forecast,find weather forecast online,web search
+,,coding tutorials,search for coding tutorials,web search
+,,ai tutorials,i want to learn about ai tutorials,web search
+,,local restaurants,look up local restaurants,web search
+,,book recommendations,find information about book recommendations,web search
+,,health tips,find health tips online,web search
+,,weather forecast,search for weather forecast,web search
+,,coding tutorials,find information about coding tutorials,web search
+,,tech reviews,find information about tech reviews,web search
+,,latest news,search for latest news,web search
+,,tech reviews,find tech reviews online,web search
+,,weather forecast,look up weather forecast,web search
+,,job listings,search the web for job listings,web search
+,,local restaurants,i want to learn about local restaurants,web search
+,,recipe ideas,i want to learn about recipe ideas,web search
+,,stock market,search for stock market,web search
+,,movie reviews,show me movie reviews,web search
+,,tech reviews,look up tech reviews,web search
+,,ai tutorials,look up ai tutorials,web search
+,,movie reviews,find information about movie reviews,web search
+,,job listings,find information about job listings,web search
+,,latest news,look up latest news,web search
+,,job listings,look up job listings,web search
+,,health tips,show me health tips,web search
+,,local restaurants,find local restaurants online,web search
+,,recipe ideas,show me recipe ideas,web search
+,,movie reviews,i want to learn about movie reviews,web search
+,,movie reviews,search the web for movie reviews,web search
+,,local restaurants,search the web for local restaurants,web search
+,,tech reviews,i want to learn about tech reviews,web search
+,,weather forecast,search the web for weather forecast,web search
+,,tech reviews,search for tech reviews,web search
+,,job listings,show me job listings,web search
+,,stock market,find information about stock market,web search
+,,stock market,look up stock market,web search
+,,ai tutorials,find ai tutorials online,web search
+,,health tips,search for health tips,web search
+,,ai tutorials,search the web for ai tutorials,web search
+,,none,show system settings,system settings
+,,none,show configuration,system settings
+,,none,open system preferences,system settings
+,,none,how much battery is left,battery status
+,,none,check battery level,battery status
+,,none,show battery status,battery status
+,,none,access settings menu,system settings
+,,none,open settings,system settings
+,,none,battery remaining,battery status
+,,none,check power level,battery status
+,,none,launch settings panel,system settings
+,,none,what's the battery percentage,battery status
+,,relaxing music,i want to listen to relaxing music,play music
+,,9:00 AM,set wake up time to 9:00 am,set alarm
+,,8:00 AM,set wake up time to 8:00 am,set alarm
+,,6:00 AM,set alarm for 6:00 am,set alarm
+,,10:00 PM,alarm for 10:00 pm,set alarm
+,,7:00 AM,create alarm at 7:00 am,set alarm
+,,9:00 AM,create alarm at 9:00 am,set alarm
+,,pop,play some pop,play music
+,,6:00 AM,alarm for 6:00 am,set alarm
+,,11:00 PM,set wake up time to 11:00 pm,set alarm
+,,workout music,play workout music music,play music
+,,hip hop,start playing hip hop,play music
+,,jazz,put on jazz,play music
+,,hip hop,play hip hop music,play music
+,,classical,play some classical,play music
+,,workout music,i want to listen to workout music,play music
+,,10:00 PM,wake me up at 10:00 pm,set alarm
+,,11:00 PM,set alarm for 11:00 pm,set alarm
+,,6:00 AM,create alarm at 6:00 am,set alarm
+,,8:00 AM,wake me up at 8:00 am,set alarm
+,,rock,i want to listen to rock,play music
+,,6:00 AM,wake me up at 6:00 am,set alarm
+,,10:00 PM,set alarm for 10:00 pm,set alarm
+,,9:00 AM,wake me up at 9:00 am,set alarm
+,,pop,start playing pop,play music
+,,7:00 AM,set alarm for 7:00 am,set alarm
+,,8:00 AM,alarm for 8:00 am,set alarm
+,,rock,play rock music,play music
+,,11:00 PM,wake me up at 11:00 pm,set alarm
+,,classical,play classical music,play music
+,,classical,put on classical,play music
+,,hip hop,i want to listen to hip hop,play music
+,,9:00 AM,set alarm for 9:00 am,set alarm
+,,rock,start playing rock,play music
+,,7:00 AM,wake me up at 7:00 am,set alarm
+,,workout music,start playing workout music,play music
+,,7:00 AM,set wake up time to 7:00 am,set alarm
+,,relaxing music,start playing relaxing music,play music
+,,workout music,put on workout music,play music
+,,relaxing music,play some relaxing music,play music
+,,hip hop,put on hip hop,play music
+,,pop,play pop music,play music
+,,7:00 AM,alarm for 7:00 am,set alarm
+,,jazz,play jazz music,play music
+,,10:00 PM,create alarm at 10:00 pm,set alarm
+,,jazz,play some jazz,play music
+,,relaxing music,put on relaxing music,play music
+,,rock,put on rock,play music
+,,pop,put on pop,play music
+,,8:00 AM,set alarm for 8:00 am,set alarm
+,,11:00 PM,alarm for 11:00 pm,set alarm
+,,10:00 PM,set wake up time to 10:00 pm,set alarm
+,,classical,start playing classical,play music
+,,11:00 PM,create alarm at 11:00 pm,set alarm
+,,relaxing music,play relaxing music music,play music
+,,jazz,start playing jazz,play music
+,,9:00 AM,alarm for 9:00 am,set alarm
+,,pop,i want to listen to pop,play music
+,,hip hop,play some hip hop,play music
+,,classical,i want to listen to classical,play music
+,,8:00 AM,create alarm at 8:00 am,set alarm
+,,jazz,i want to listen to jazz,play music
+,,workout music,play some workout music,play music
+,,rock,play some rock,play music
+,,6:00 AM,set wake up time to 6:00 am,set alarm

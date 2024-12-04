@@ -1,0 +1,278 @@
+keyword,command
+
+
+click,click on
+select,click on
+tap on,click on
+press,click on
+choose,click on
+touch,click on
+interact with,click on
+activate,click on
+engage,click on
+hit,click on
+perform action on this,click on
+use this element now,click on
+trigger this element please,click on
+show me what this does,click on
+make this button work,click on
+can you click this for me,click on
+i want to click on this,click on
+please select this option,click on
+let me interact with this,click on
+
+
+open,open application
+start,open application
+launch,open application
+run application,open application
+access app,open application
+initiate,open application
+begin,open application
+load,open application
+execute,open application
+boot,open application
+can you open this app,open application
+i need to start this program,open application
+please launch this application,open application
+help me open this software,open application
+start this program for me,open application
+could you run this app please,open application
+i want to use this application,open application
+get this program running please,open application
+
+close,close application
+exit,close application
+shut down app,close application
+terminate,close application
+stop app,close application
+quit,close application
+end,close application
+kill,close application
+dismiss,close application
+shut off,close application
+please close this program,close application
+i need to exit this app,close application
+can you shut this down,close application
+stop this application please,close application
+help me close this software,close application
+i want to terminate this app,close application
+time to close this program,close application
+let's end this application,close application
+
+
+make folder,create folder
+create directory,create folder
+new folder,create folder
+add folder,create folder
+build folder,create folder
+generate folder,create folder
+establish folder,create folder
+set up folder,create folder
+initialize folder,create folder
+construct folder,create folder
+i need a new folder here,create folder
+can you create a folder for me,create folder
+please make a new directory,create folder
+help me set up a folder,create folder
+let's create a new folder here,create folder
+i want to make a new directory,create folder
+time to create another folder,create folder
+establish a new folder please,create folder
+
+remove file,delete file
+delete file,delete file
+erase file,delete file
+discard file,delete file
+get rid of file,delete file
+trash file,delete file
+destroy file,delete file
+eliminate file,delete file
+wipe file,delete file
+purge file,delete file
+i need to delete this file,delete file
+can you remove this for me,delete file
+please get rid of this file,delete file
+help me delete this document,delete file
+time to remove this file now,delete file
+i want this file deleted please,delete file
+let's remove this permanently,delete file
+could you erase this file please,delete file
+
+
+battery,battery status
+check battery,battery status
+battery status,battery status
+power level,battery status
+battery health,battery status
+energy level,battery status
+power status,battery status
+charge level,battery status
+battery life,battery status
+power remaining,battery status
+how much battery do i have left,battery status
+what's my battery percentage now,battery status
+can you check my battery level,battery status
+show me my power status please,battery status
+i need to know battery health,battery status
+let me see my battery status,battery status
+what's the power situation like,battery status
+check my battery percentage please,battery status
+
+cpu,cpu usage
+processor,cpu usage
+system load,cpu usage
+check cpu,cpu usage
+cpu status,cpu usage
+processing power,cpu usage
+cpu load,cpu usage
+processor health,cpu usage
+system resources,cpu usage
+cpu performance,cpu usage
+how is my processor doing,cpu usage
+what's my cpu usage like,cpu usage
+show me system performance,cpu usage
+check processor load please,cpu usage
+i need to monitor cpu usage,cpu usage
+let me see resource utilization,cpu usage
+what's my processing power like,cpu usage
+show system resource status,cpu usage
+
+
+search,web search
+find online,web search
+google,web search
+search the web,web search
+look up,web search
+browse for,web search
+search internet,web search
+query web,web search
+find information,web search
+research online,web search
+can you search this for me,web search
+i need to find something online,web search
+help me look this up please,web search
+search the internet for this,web search
+let's find this on the web,web search
+could you google this for me,web search
+i want to research this topic,web search
+please look this up online,web search
+
+website,open website
+visit site,open website
+go to website,open website
+browse site,open website
+open url,open website
+load page,open website
+access site,open website
+navigate to site,open website
+show website,open website
+display page,open website
+can you open this website,open website
+i need to visit this webpage,open website
+please load this site for me,open website
+take me to this website please,open website
+help me access this webpage,open website
+i want to see this website,open website
+could you show me this page,open website
+let's visit this site please,open website
+
+
+volume up,increase volume
+raise volume,increase volume
+turn up volume,increase volume
+increase sound,increase volume
+boost volume,increase volume
+amplify sound,increase volume
+louder,increase volume
+maximize volume,increase volume
+increase audio,increase volume
+heighten volume,increase volume
+make it a bit louder please,increase volume
+can you turn the volume up,increase volume
+i need this to be louder,increase volume
+please increase the sound,increase volume
+turn up the audio level please,increase volume
+make the volume higher now,increase volume
+boost the sound a little bit,increase volume
+let's make this louder please,increase volume
+
+volume down,decrease volume
+lower volume,decrease volume
+reduce volume,decrease volume
+decrease sound,decrease volume
+turn down volume,decrease volume
+softer,decrease volume
+minimize volume,decrease volume
+quiet down,decrease volume
+reduce audio,decrease volume
+lower sound,decrease volume
+make it a bit quieter please,decrease volume
+can you turn the volume down,decrease volume
+i need this to be softer,decrease volume
+please decrease the sound,decrease volume
+turn down the audio level,decrease volume
+make the volume lower now,decrease volume
+reduce the sound a little bit,decrease volume
+let's make this quieter please,decrease volume
+
+
+run,run script
+execute script,run script
+start script,run script
+run program,run script
+launch script,run script
+process script,run script
+perform script,run script
+activate script,run script
+trigger script,run script
+initiate script,run script
+can you run this script for me,run script
+i need to execute this program,run script
+please start this automation,run script
+help me run this script now,run script
+let's get this script running,run script
+time to execute this process,run script
+could you launch this script,run script
+i want to run this automation,run script
+
+
+screenshot,take screenshot
+capture screen,take screenshot
+snap screen,take screenshot
+print screen,take screenshot
+save screen,take screenshot
+screen capture,take screenshot
+grab screen,take screenshot
+screen snap,take screenshot
+capture display,take screenshot
+screen image,take screenshot
+can you take a screenshot,take screenshot
+i need to capture this screen,take screenshot
+please take a picture of this,take screenshot
+help me save this screen now,take screenshot
+let's capture this window please,take screenshot
+take a snapshot of this please,take screenshot
+could you screenshot this for me,take screenshot
+i want to save this screen now,take screenshot
+
+translate,translate text
+translate this,translate text
+what does this mean,translate text
+interpretation,translate text
+convert language,translate text
+change language,translate text
+decode text,translate text
+explain text,translate text
+convert words,translate text
+language help,translate text
+can you translate this for me,translate text
+i need this in another language,translate text
+please help me understand this,translate text
+what does this text mean in english,translate text
+translate this to my language,translate text
+help me read this in english,translate text
+could you interpret this text,translate text
+i want to know what this means,translate text
+
+
