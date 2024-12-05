@@ -1,31 +1,22 @@
-from transformers import AutoTokenizer, AutoModelForCausalLM
+import google.generativeai as genai
 
-# Use GPT-2 model
-model_name = "gpt2"  # You can replace this with another GPT-2 variant, e.g., "gpt2-medium" or "gpt2-large"
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(model_name)
+# Configure the API with your Gemini API key
+genai.configure(api_key="AIzaSyCiQrXmDQFOzlCRWcZdqNyVNH6k7J9BqZ8")
 
-def generate_function_code(user_input):
-    """
-    Generate Python function code based on the user input task description.
-    """
-    prompt = (
-        f"Generate a Python function for the following task: '{user_input}'. "
-        f"The function should include necessary imports, a well-defined function, "
-        f"and print the relevant output."
-    )
-    
-    # Tokenize input and generate code
-    inputs = tokenizer(prompt, return_tensors="pt", max_length=512, truncation=True)
-    outputs = model.generate(inputs["input_ids"], max_length=512, num_beams=5, early_stopping=True)
-    
-    # Decode and return the generated code
-    generated_code = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    return generated_code
+# Define the task prompt for generating Python code
+prompt = """
+Write a Python function to check the battery status of a computer using the psutil library.
+The function should:
+1. Get the battery percentage and charging status.
+2. Print the results in a readable format.
+3. Handle cases where the battery status is unavailable.
+Include necessary imports and example usage.
+"""
 
-# Example usage
-user_input = "check the battery status"  # You can change this to any user request
-function_code = generate_function_code(user_input)
+# Use the Gemini model to generate content based on the prompt
+model = genai.GenerativeModel("gemini-1.5-flash")
+response = model.generate_content(prompt)
 
+# Print the generated code
 print("Generated Code:\n")
-print(function_code)
+print(response.text)
