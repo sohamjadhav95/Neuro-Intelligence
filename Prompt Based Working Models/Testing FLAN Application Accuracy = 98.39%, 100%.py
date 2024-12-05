@@ -85,10 +85,7 @@ def extract_argument(user_input):
     outputs = model.generate(inputs.input_ids, max_length=50, num_beams=5, early_stopping=True)
     return tokenizer.decode(outputs[0], skip_special_tokens=True)
 
-
-
-
-
+    
 def test_accuracy(test_data):
     """
     Test the model's accuracy for command and argument extraction.

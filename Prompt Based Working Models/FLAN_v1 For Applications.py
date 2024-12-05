@@ -41,6 +41,8 @@ def extract_argument(user_input):
     Extract the argument from the user input, focusing on application names.
     Checks against a predefined list of application names first, then falls back to model extraction.
     """
+    import re  # Use regex for better matching
+
     # List of predefined application names
     app_names = [
         "notepad",
@@ -67,60 +69,38 @@ def extract_argument(user_input):
         "control panel",
         "settings"
     ]
-    
-    # Check for predefined app names in the user input
+
+    # Preprocess input for case-insensitive matching
+    user_input_lower = user_input.lower()
+
+    # Use regex to match predefined application names
     for app in app_names:
-        if app in user_input.lower():
+        if re.search(rf"\b{re.escape(app)}\b", user_input_lower):  # Ensure exact word match
             return app  # Return the matched application name
-    
+
     # If no predefined app name is found, use the model to extract the argument
     prompt = (
-        f"You are an argument extraction system. Extract the 'argument' from the user input, "
-        f"which represents the specific name of application or a software in the provided list.\n\n"
-        f"If application or software name not match from list then you can extract the specific name that are mentioned in user input.\n\n"
-        f"Input: {user_input}\nOutput:"
+        f"Extract the application or software name from the following user input. "
+        f"Prioritize matching names from this predefined list: {', '.join(app_names)}. "
+        f"If none match exactly, extract the most likely name mentioned in the input.\n\n"
+        f"User Input: {user_input}\nApplication Name:"
     )
-    
+
+    # Generate model inputs and outputs
     inputs = tokenizer(prompt, return_tensors="pt", max_length=512, truncation=True)
     outputs = model.generate(inputs.input_ids, max_length=50, num_beams=5, early_stopping=True)
     return tokenizer.decode(outputs[0], skip_special_tokens=True)
 
 
-def test_command_argument_extraction():
-    """
-    Test the functions for extracting command and argument with multiple user inputs.
-    """
-    
-    # User inputs for testing
-    user_inputs = [
-        "please open the notepad",
-        "launch google chrome",
-        "close the VLC media player",
-        "can you open the calculator",
-        "shut down the Spotify app",
-        "please close the Zoom app",
-        "launch the command prompt",
-        "open Adobe Acrobat Reader",
-        "close the steam application",
-        "please open microsoft word",
-        "exit from task manager",
-        "launch microsoft excel",
-        "quit the paint application",
-        "start mozilla firefox"
-    ]
-    
-    # Iterate over each user input
-    for user_input in user_inputs:
-        # Extract command and argument separately
-        extracted_command = extract_command(user_input)
-        extracted_argument = extract_argument(user_input)
-        
-        # Print results
-        print("User Input:", user_input)
-        print("Extracted Command:", extracted_command)
-        print("Extracted Argument:", extracted_argument)
-        print("-" * 50)
 
-# Run the test
-test_command_argument_extraction()
+def Command_Argument_Combined():
+    predicted_command = extract_command(user_input)
+    predicted_argument = extract_argument(user_input)
+    
+    print (predicted_command +" "+ predicted_argument)
+    return predicted_command +" "+ predicted_argument
 
+
+user_input = "open chrome"
+
+Command_Argument_Combined()

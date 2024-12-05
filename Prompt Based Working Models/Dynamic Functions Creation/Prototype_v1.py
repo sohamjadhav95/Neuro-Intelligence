@@ -3,13 +3,15 @@ import google.generativeai as genai
 # Configure the API with your Gemini API key
 genai.configure(api_key="AIzaSyCiQrXmDQFOzlCRWcZdqNyVNH6k7J9BqZ8")
 
+user_input = "Cheak Battery Status"
+
 # Define the task prompt for generating Python code
-prompt = """
-Write a Python function to check the battery status of a computer using the psutil library.
+prompt = f"""
+Write a Python function for {user_input}.
 The function should:
-1. Get the battery percentage and charging status.
-2. Print the results in a readable format.
-3. Handle cases where the battery status is unavailable.
+1. Include Necessary Imports.
+2. Clean Code without errors.
+3. Handle dynamic requirmets for generating code based on target for code.
 Include necessary imports and example usage.
 """
 

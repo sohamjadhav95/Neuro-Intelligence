@@ -47,7 +47,7 @@ def test_command_argument_extraction():
     ]
     
     # User input for testing
-    user_input = "please open the chrome app"
+    user_input = "can you open chrome Browser"
     
     # Extract command and argument separately
     extracted_command = extract_command(user_input, provided_commands)
