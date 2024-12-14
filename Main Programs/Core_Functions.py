@@ -41,15 +41,16 @@ def speak_text(text):
 #-----------------------------------------------------------------------------------------------
 
 # Function to listen for commands
-def listen_input():
+def listen_command():
     with sr.Microphone() as source:
         print("Please speak now...")
-        recognizer.adjust_for_ambient_noise(source)  # Adjust for ambient noise
-        audio = recognizer.listen(source)
+        recognizer.pause_threshold = 1
+        recognizer.adjust_for_ambient_noise(source, duration=1)  # Adjust for ambient noise
+        audio = recognizer.listen(source, 10, 7)
 
         try:
             # Using Google Speech API (no large models to download)
-            command = recognizer.recognize_google(audio)
+            command = recognizer.recognize_google(audio, language= 'en-in')
             print("You said:", command)
             speak_text(f"You said: {command}")
             return command.lower()
@@ -82,6 +83,9 @@ class ApplicationHandler:
         If unsuccessful, returns False to indicate further methods should be attempted.
         """
         app_command = applications_paths.get(app_name)
+        if not app_command:
+            add_custom_app(app_name)
+            app_command = applications_paths.get(app_name)
 
         if app_command:
             try:
@@ -94,7 +98,6 @@ class ApplicationHandler:
                 return False
 
         app_path = shutil.which(app_name.lower())
-        
         if app_path:
             try:
                 speak_text(f"Opening {app_name}...")
@@ -107,6 +110,27 @@ class ApplicationHandler:
         return False
 
     def open_application_fallback(self, app_name):
+        
+        def get_voice_confirmation(retries = 3):
+            """
+            Asks the user for a yes/no confirmation via voice input with a retry mechanism.
+            """
+            for attempt in range(retries):
+                try:
+                    speak_text("Do you want to proceed? Please say yes procees or no cancel.")
+                    response = listen_command()  # Replace with your voice input capture function
+                    if response.lower() in ["yes","yes proceed", "yeah", "yep"]:
+                        return True
+                    elif response.lower() in ["no cancel", "nope"]:
+                        return False
+                    else:
+                        speak_text("I didn't catch that. Please say yes or no.")
+                except Exception as e:
+                    speak_text(f"Error: {str(e)}. Let's try again.")
+            
+            speak_text("Unable to get a clear response. Cancelling the action.")
+            return False
+        
         """
         Attempts to open an application using Windows Start Menu search as a fallback.
         """
@@ -114,8 +138,12 @@ class ApplicationHandler:
         pyautogui.hotkey("winleft")
         pyautogui.write(app_name, interval=0.3)
         
+        
+        if not get_voice_confirmation():
+            speak_text("Action cancelled.")
+            return
+        
         pyautogui.press("enter")
-        speak_text(f"{app_name} opened")
 
     def close_application(self, app_name):
         """
@@ -153,72 +181,6 @@ class ApplicationHandler:
 app_handler = ApplicationHandler()
 
 
-# *Web Operations*
-
-class WebFunctions:
-    def __init__(self):
-        pass  # You can initialize any properties if needed
-
-    # Web Search
-    def web_search(self, query):
-        url = f"https://www.google.com/search?q={query}"
-        webbrowser.open(url)
-        speak_text(f"Searching the web for {query}...")
-
-    # YouTube Search
-    def youtube_search(self, query):
-        url = f"https://www.youtube.com/results?search_query={query}"
-        webbrowser.open(url)
-        speak_text(f"Searching YouTube for {query}...")
-
-    # Open Website
-    def open_website(self, website_url_short):
-        # Ensure the URL starts with 'http://' or 'https://'
-        if not website_url_short.startswith("http://") and not website_url_short.startswith("https://"):
-            website_url = "http://" + website_url_short  # Add 'http://' by default
-        
-        # Try opening the URL in the default browser
-        try:
-            webbrowser.open(website_url)
-            speak_text(f"Opening the website: {website_url_short}")
-        except Exception as e:
-            speak_text(f"Failed to open the website. Error: {str(e)}")
-
-    # Get weather information
-    def get_weather(self, city_name):
-        api_key = "your_api_key"  # Add your API key
-        url = f"http://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={api_key}"
-        response = requests.get(url)
-        if response.status_code == 200:
-            data = response.json()
-            main = data['main']
-            temperature = main['temp']
-            description = data['weather'][0]['description']
-            speak_text(f"The weather in {city_name} is {description} with a temperature of {temperature}°C.")
-        else:
-            speak_text(f"Could not get weather data for {city_name}.")
-
-    # Check Internet Status
-    def check_internet(self):
-        try:
-            response = requests.get("http://google.com", timeout=5)
-            if response.status_code == 200:
-                speak_text("You are connected to the internet.")
-            else:
-                speak_text("No internet connection detected.")
-        except requests.ConnectionError:
-            speak_text("No internet connection detected.")
-
-    # Check for email (Assuming integration with an email service)
-    def check_email(self):
-        speak_text("Opening your email client...")
-        # You can integrate your email client here, like opening Gmail using webbrowser:
-        webbrowser.open("https://mail.google.com")
-    
-    # Other functionalities like opening a specific page can be added similarly
-    
-    
-    
 # *System Control Functions*
 class System_control:
 
@@ -266,7 +228,7 @@ class System_control:
     # Shutdown with confirmation
     def shutdown(self):
         speak_text("Are you sure you want to shut down the system? Say 'yes' to proceed or 'no' to cancel.")
-        confirmation = listen_input()  # Listen for the user's confirmation
+        confirmation = listen_command()  # Listen for the user's confirmation
 
         if confirmation is not None:
             if "yes" in confirmation:
@@ -280,7 +242,7 @@ class System_control:
     # Restart with confirmation
     def restart(self):
         speak_text("Are you sure you want to restart the system? Say 'yes' to proceed or 'no' to cancel.")
-        confirmation = listen_input()  # Listen for the user's confirmation
+        confirmation = listen_command()  # Listen for the user's confirmation
 
         if confirmation is not None:
             if "yes" in confirmation:
@@ -370,6 +332,71 @@ class FileHandler:
 file_handler = FileHandler()  # Instantiate FileHandler
 
 
+# *Web Operations*
+
+class WebFunctions:
+    def __init__(self):
+        pass  # You can initialize any properties if needed
+
+    # Web Search
+    def web_search(self, query):
+        url = f"https://www.google.com/search?q={query}"
+        webbrowser.open(url)
+        speak_text(f"Searching the web for {query}...")
+
+    # YouTube Search
+    def youtube_search(self, query):
+        url = f"https://www.youtube.com/results?search_query={query}"
+        webbrowser.open(url)
+        speak_text(f"Searching YouTube for {query}...")
+
+    # Open Website
+    def open_website(self, website_url_short):
+        # Ensure the URL starts with 'http://' or 'https://'
+        if not website_url_short.startswith("http://") and not website_url_short.startswith("https://"):
+            website_url = "http://" + website_url_short  # Add 'http://' by default
+        
+        # Try opening the URL in the default browser
+        try:
+            webbrowser.open(website_url)
+            speak_text(f"Opening the website: {website_url_short}")
+        except Exception as e:
+            speak_text(f"Failed to open the website. Error: {str(e)}")
+
+    # Get weather information
+    def get_weather(self, city_name):
+        api_key = "your_api_key"  # Add your API key
+        url = f"http://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={api_key}"
+        response = requests.get(url)
+        if response.status_code == 200:
+            data = response.json()
+            main = data['main']
+            temperature = main['temp']
+            description = data['weather'][0]['description']
+            speak_text(f"The weather in {city_name} is {description} with a temperature of {temperature}°C.")
+        else:
+            speak_text(f"Could not get weather data for {city_name}.")
+
+    # Check Internet Status
+    def check_internet(self):
+        try:
+            response = requests.get("http://google.com", timeout=5)
+            if response.status_code == 200:
+                speak_text("You are connected to the internet.")
+            else:
+                speak_text("No internet connection detected.")
+        except requests.ConnectionError:
+            speak_text("No internet connection detected.")
+
+    # Check for email (Assuming integration with an email service)
+    def check_email(self):
+        speak_text("Opening your email client...")
+        # You can integrate your email client here, like opening Gmail using webbrowser:
+        webbrowser.open("https://mail.google.com")
+    
+    # Other functionalities like opening a specific page can be added similarly
+web_functions = WebFunctions() 
+
 
 # --*Click on UI with Commands*--
 
@@ -443,3 +470,6 @@ class UIHandler:
         else:
             print(f"Trying find_and_click_text as a last resort for '{target_name}'...")
             self.find_and_click_text(target_name)
+
+
+ui_handler = UIHandler()  # Instantiate UIHandler

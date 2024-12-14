@@ -21,6 +21,7 @@ from PIL import ImageGrab
 from pywinauto.application import Application
 from pywinauto import findwindows
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
+from transformers import T5Tokenizer, T5ForConditionalGeneration
 
 from app_paths import applications_paths, add_custom_app
 
@@ -534,7 +535,6 @@ commands = {
 
 #--------------------------------------------------------------------------------------------------------
 
-from transformers import T5Tokenizer, T5ForConditionalGeneration
 
 # Load the FLAN-T5 model and tokenizer
 model_name = "google/flan-t5-base"  # You can upgrade to "flan-t5-large" if needed
@@ -581,29 +581,13 @@ def extract_argument(user_input):
 
     # List of predefined application names
     app_names = [
-        "notepad",
-        "calculator",
-        "paint",
-        "wordpad",
-        "microsoft edge",
-        "google chrome",
-        "mozilla firefox",
-        "microsoft word",
-        "microsoft excel",
-        "microsoft powerpoint",
-        "vlc media player",
-        "spotify",
-        "adobe acrobat reader",
-        "steam",
-        "discord",
-        "file explorer",
-        "windows media player",
-        "snipping tool",
-        "task manager",
-        "command prompt",
-        "powershell",
-        "control panel",
-        "settings"
+        "notepad", "calculator", "paint", "wordpad",
+        "microsoft edge", "google chrome", "mozilla firefox",
+        "microsoft word", "microsoft excel", "microsoft powerpoint",
+        "vlc media player", "spotify", "adobe acrobat reader",
+        "steam", "discord", "file explorer",
+        "windows media player", "snipping tool", "task manager",
+        "command prompt", "powershell", "control panel", "settings"
     ]
 
     # Preprocess input for case-insensitive matching
@@ -629,14 +613,16 @@ def extract_argument(user_input):
 
 
 def Command_Argument_Combined():
-    predicted_command = extract_command(listen_command())
-    predicted_argument = extract_argument(listen_command())
+    
+    user_input = "close chrome"
+    
+    predicted_command = extract_command(user_input)
+    predicted_argument = extract_argument(user_input)
     
     print (predicted_command +" "+ predicted_argument)
     return predicted_command +" "+ predicted_argument
 
 
-Command_Argument_Combined()
 
 #--------------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------------

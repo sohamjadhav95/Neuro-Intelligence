@@ -1,106 +1,48 @@
-from transformers import T5Tokenizer, T5ForConditionalGeneration
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from webdriver_manager.chrome import ChromeDriverManager
+import time
 
-# Load the FLAN-T5 model and tokenizer
-model_name = "google/flan-t5-base"  # You can upgrade to "flan-t5-large" if needed
-tokenizer = T5Tokenizer.from_pretrained(model_name)
-model = T5ForConditionalGeneration.from_pretrained(model_name)
 
-def extract_command(user_input):
-    """
-    Extract and normalize the command from the user input to match predefined commands.
-    """
-    prompt = (
-        f"You are a command extraction system. Extract the 'command' from the user input "
-        f"and ensure it matches one of the predefined commands: 'open application', 'close application'.\n\n"
-        f"Input: {user_input}\nOutput:"
-    )
+def interact_with_twitter():
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    driver.get("https://twitter.com/login")
+    time.sleep(2)
+
+    # Login process
+    username_field = driver.find_element(By.NAME, "text")
+    username_field.send_keys("Soham_Jadhav_95")  # Replace with your username
+    username_field.send_keys(Keys.RETURN)
+    time.sleep(2)
+
+    password_field = driver.find_element(By.NAME, "password")
+    password_field.send_keys("Soham@987*#")  # Replace with your password
+    password_field.send_keys(Keys.RETURN)
+    time.sleep(5)
+
+    # Search for "machine learning"
+    search_box = driver.find_element(By.XPATH, "//input[@aria-label='Search query']")
+    search_box.send_keys("machine learning")
+    search_box.send_keys(Keys.RETURN)
+    time.sleep(3)
+
+    # Like and comment on first 5 posts
+    tweets = driver.find_elements(By.XPATH, "//article")[:5]
+    for tweet in tweets:
+        try:
+            like_button = tweet.find_element(By.XPATH, ".//div[@data-testid='like']")
+            like_button.click()
+            print("Liked a tweet.")
+        except Exception as e:
+            print(f"Error interacting with tweet: {e}")
+
+
+
+
+if __name__ == "__main__":
     
-    inputs = tokenizer(prompt, return_tensors="pt", max_length=512, truncation=True)
-    outputs = model.generate(inputs.input_ids, max_length=50, num_beams=5, early_stopping=True)
-    extracted_command = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    
-    # Normalize the extracted command
-    command_lower = extracted_command.lower()
-    if "open" in command_lower or "launch" in command_lower or "start" in command_lower:
-        return "open application"
-    elif (
-        "close" in command_lower
-        or "shut down" in command_lower
-        or "quit" in command_lower
-        or "exit" in command_lower
-    ):
-        return "close application"
-    else:
-        return extracted_command  # Fallback to raw output if no match
+    print("\nInteracting with Twitter...")
+    interact_with_twitter()
 
-
-
-
-def extract_argument(user_input):
-    """
-    Extract the argument from the user input, focusing on application names.
-    Checks against a predefined list of application names first, then falls back to model extraction.
-    """
-    import re  # Use regex for better matching
-
-    # List of predefined application names
-    app_names = [
-        "notepad",
-        "calculator",
-        "paint",
-        "wordpad",
-        "microsoft edge",
-        "google chrome",
-        "mozilla firefox",
-        "microsoft word",
-        "microsoft excel",
-        "microsoft powerpoint",
-        "vlc media player",
-        "spotify",
-        "adobe acrobat reader",
-        "steam",
-        "discord",
-        "file explorer",
-        "windows media player",
-        "snipping tool",
-        "task manager",
-        "command prompt",
-        "powershell",
-        "control panel",
-        "settings"
-    ]
-
-    # Preprocess input for case-insensitive matching
-    user_input_lower = user_input.lower()
-
-    # Use regex to match predefined application names
-    for app in app_names:
-        if re.search(rf"\b{re.escape(app)}\b", user_input_lower):  # Ensure exact word match
-            return app  # Return the matched application name
-
-    # If no predefined app name is found, use the model to extract the argument
-    prompt = (
-        f"Extract the application or software name from the following user input. "
-        f"Prioritize matching names from this predefined list: {', '.join(app_names)}. "
-        f"If none match exactly, extract the most likely name mentioned in the input.\n\n"
-        f"User Input: {user_input}\nApplication Name:"
-    )
-
-    # Generate model inputs and outputs
-    inputs = tokenizer(prompt, return_tensors="pt", max_length=512, truncation=True)
-    outputs = model.generate(inputs.input_ids, max_length=50, num_beams=5, early_stopping=True)
-    return tokenizer.decode(outputs[0], skip_special_tokens=True)
-
-
-
-def Command_Argument_Combined():
-    predicted_command = extract_command(user_input)
-    predicted_argument = extract_argument(user_input)
-    
-    print (predicted_command +" "+ predicted_argument)
-    return predicted_command +" "+ predicted_argument
-
-
-user_input = "open chrome"
-
-Command_Argument_Combined()
