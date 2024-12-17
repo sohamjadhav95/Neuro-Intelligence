@@ -1,45 +1,30 @@
 Core Features:
 
-
 Voice Commands: You can use voice commands to open and close applications, switch between windows, scroll and zoom, select, and edit text, copy and paste, and much more.
-
 Number Overlays: Voice Access highlights clickable elements on the screen with number overlays, making it easier to interact with buttons, icons, menus, windows, and sliders without a mouse or keyboard.
-
 Text Authoring: You can dictate text into any application that accepts text input, such as Word, Outlook, or Notepad.
-
 Correction Commands: Voice Access includes correction commands to fix misrecognized words. You can say commands like "Correct [text]" or "Spell that" to make corrections3.
-
 Voice Shortcuts: You can create your own voice shortcuts for frequently used commands or sequences of actions.
 
 Additional Functionalities:
 
-
 Sign-In: Voice Access allows you to log in to your PC and access areas on the Lock screen.
-
 Multi-Display Support: While limited, Voice Access can be used in a multi-display setup.
-
 Screen Reader Compatibility: You can use a screen reader to set up Voice Access for other users.
-
 Auto Restart: Voice Access will restart automatically in case of an issue, ensuring continuous accessibility.
-
 Windows Search: You can use voice commands to search for applications or files directly with Windows search.
 
 User Interface:
 
-
 Voice Access Bar: This bar is docked on top of your screen and allows you to control the microphone, view your commands as you speak them, and check the command progress and execution status.
-
 Settings Menu: Access different voice access settings from the settings menu.
-
 Help Menu: Access different help resources and the Voice Access guide.
+
 
 Getting Started:
 
-
 Voice Access Guide: The guide helps you learn and practice basic voice access commands. You can open it from the Voice Access UI or by saying "Open Voice Access guide"4.
-
 Is there a specific feature you're most interested in or need help with?
-
 
 
 1. Natural Language Processing (NLP) for Dynamic Commands

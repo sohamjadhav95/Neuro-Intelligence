@@ -104,7 +104,7 @@ def load_command_mapping(csv_file):
     return command_mapping
 
 # Load the command mapping
-csv_file = "E:\Projects\VoxSys\Main Programs\command_mapping.csv"
+csv_file = "E:\\Projects\\Neuro-Intelligence\\Main Programs\\command_mapping.csv"
 command_mapping = load_command_mapping(csv_file)
 
 

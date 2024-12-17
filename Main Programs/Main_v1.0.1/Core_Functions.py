@@ -1,5 +1,3 @@
-# The code uses the 'speech_recognition' library to convert speech to text.
-# The code uses the 'pyttsx3' library to convert text to speech.
 
 import os
 import subprocess
@@ -21,10 +19,8 @@ from PIL import ImageGrab
 from pywinauto.application import Application
 from pywinauto import findwindows
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
-from transformers import T5Tokenizer, T5ForConditionalGeneration
 
 from app_paths import applications_paths, add_custom_app
-
 
 
 # Initialize the recognizer and TTS engine
@@ -50,7 +46,7 @@ def listen_command():
         print("Please speak now...")
         recognizer.pause_threshold = 1
         recognizer.adjust_for_ambient_noise(source, duration=1)  # Adjust for ambient noise
-        audio = recognizer.listen(source)
+        audio = recognizer.listen(source, 10, 7)
 
         try:
             # Using Google Speech API (no large models to download)
@@ -62,6 +58,7 @@ def listen_command():
             print("Sorry, I could not understand the audio.")
         except sr.RequestError as e:
             print("Could not request results from Google Speech API; {0}".format(e))
+  
         
 # Try to open via Start Menu
 def search_windows_search_bar(query):
@@ -476,231 +473,3 @@ class UIHandler:
 
 
 ui_handler = UIHandler()  # Instantiate UIHandler
-
-#----------------------------------------------------------------------------------------------
-#----------------------------------------------------------------------------------------------
-    
-# --*Main Code of Basic Commands*--
-
-commands = {
-    "exit": lambda: speak_text("Exiting, Good bye!"),
-    
-    # UI Access (Click on elements)
-    
-    "click on": lambda element_name: ui_handler.click_on(element_name),
-
-    # File and Folder Management
-    "create folder": lambda folder_name: file_handler.create_folder(folder_name),
-    "delete file": lambda file_name: file_handler.delete_file(file_name),
-    "move file": lambda file_name, destination: file_handler.move_file(file_name, destination),
-    "rename file": lambda old_name, new_name: file_handler.rename_file(old_name, new_name),
-    
-    # System Information
-    "battery status": lambda: systemInfromation.get_battery_status(),
-    "cpu usage": lambda: systemInfromation.get_cpu_usage(),
-    "internet status": lambda: systemInfromation.check_internet(),
-    "current time": lambda: systemInfromation.get_current_time(),
-    
-    # Web and Browser Commands
-    "web search": lambda query: web_functions.web_search(query),
-    "youtube search": lambda query: web_functions.youtube_search(query),
-    "check email": lambda: web_functions.check_email(),
-    "check internet": lambda: web_functions.check_internet(),
-    "get weather": lambda city_name: web_functions.get_weather(city_name),
-    "open website": lambda website_url: web_functions.open_website(website_url),
-  
-    # System Control
-    "increase volume": lambda: system_control.increase_volume(),
-    "decrease volume": lambda: system_control.decrease_volume(),
-    "mute sound": lambda: system_control.mute_sound(),
-    "unmute sound": lambda: system_control.unmute_sound(),
-    "sleep mode": lambda: system_control.sleep_mode(),
-    "shutdown": lambda: system_control.shutdown(),
-    "restart": lambda: system_control.restart(),
-    
-    # Personal Assistant
-    "set reminder": lambda reminder: speak_text(f"Setting reminder: {reminder}"),  # Add reminder setting code here
-    "tell joke": lambda: speak_text("Why don't scientists trust atoms? Because they make up everything!"),
-    "current date": lambda: speak_text(f"Today’s date is {time.strftime('%B %d, %Y')}."),
-
-    # Automation and Scripting
-    "run script": lambda script_name: speak_text(f"Running script {script_name}..."),  # Add script running code here
-    "open favorite": lambda doc_name: speak_text(f"Opening {doc_name}..."),  # Add favorite document opening code here
-}
-
-
-#--------------------------------------------------------------------------------------------------------
-
-
-# Load the FLAN-T5 model and tokenizer
-model_name = "google/flan-t5-base"  # You can upgrade to "flan-t5-large" if needed
-tokenizer = T5Tokenizer.from_pretrained(model_name)
-model = T5ForConditionalGeneration.from_pretrained(model_name)
-
-def extract_command(user_input):
-    """
-    Extract and normalize the command from the user input to match predefined commands.
-    """
-    prompt = (
-        f"You are a command extraction system. Extract the 'command' from the user input "
-        f"and ensure it matches one of the predefined commands: 'open application', 'close application'.\n\n"
-        f"Input: {user_input}\nOutput:"
-    )
-    
-    inputs = tokenizer(prompt, return_tensors="pt", max_length=512, truncation=True)
-    outputs = model.generate(inputs.input_ids, max_length=50, num_beams=5, early_stopping=True)
-    extracted_command = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    
-    # Normalize the extracted command
-    command_lower = extracted_command.lower()
-    if "open" in command_lower or "launch" in command_lower or "start" in command_lower:
-        return "open application"
-    elif (
-        "close" in command_lower
-        or "shut down" in command_lower
-        or "quit" in command_lower
-        or "exit" in command_lower
-    ):
-        return "close application"
-    else:
-        return extracted_command  # Fallback to raw output if no match
-
-
-
-
-def extract_argument(user_input):
-    """
-    Extract the argument from the user input, focusing on application names.
-    Checks against a predefined list of application names first, then falls back to model extraction.
-    """
-    import re  # Use regex for better matching
-
-    # List of predefined application names
-    app_names = [
-        "notepad", "calculator", "paint", "wordpad",
-        "microsoft edge", "google chrome", "mozilla firefox",
-        "microsoft word", "microsoft excel", "microsoft powerpoint",
-        "vlc media player", "spotify", "adobe acrobat reader",
-        "steam", "discord", "file explorer",
-        "windows media player", "snipping tool", "task manager",
-        "command prompt", "powershell", "control panel", "settings"
-    ]
-
-    # Preprocess input for case-insensitive matching
-    user_input_lower = user_input.lower()
-
-    # Use regex to match predefined application names
-    for app in app_names:
-        if re.search(rf"\b{re.escape(app)}\b", user_input_lower):  # Ensure exact word match
-            return app  # Return the matched application name
-
-    # If no predefined app name is found, use the model to extract the argument
-    prompt = (
-        f"Extract the application or software name from the following user input. "
-        f"Prioritize matching names from this predefined list: {', '.join(app_names)}. "
-        f"If none match exactly, extract the most likely name mentioned in the input.\n\n"
-        f"User Input: {user_input}\nApplication Name:"
-    )
-
-    # Generate model inputs and outputs
-    inputs = tokenizer(prompt, return_tensors="pt", max_length=512, truncation=True)
-    outputs = model.generate(inputs.input_ids, max_length=50, num_beams=5, early_stopping=True)
-    return tokenizer.decode(outputs[0], skip_special_tokens=True)
-
-
-def Command_Argument_Combined():
-    
-    user_input = listen_command()
-    
-    predicted_command = extract_command(user_input)
-    predicted_argument = extract_argument(user_input)
-    
-    print (predicted_command +" "+ predicted_argument)
-    return predicted_command +" "+ predicted_argument
-
-
-
-#--------------------------------------------------------------------------------------------------------
-#--------------------------------------------------------------------------------------------------------
-
-# Example loop to keep listening for commands
-while True:
-    command = Command_Argument_Combined()
-
-    if command:
-        # Exit command to stop the loop
-        if "exit" in command:
-            commands["exit"]()
-            break
-
-        try:
-            # Default command execution
-            if command in commands:
-                commands[command]()
-            
-            # Handle "click on" command
-            elif "click on" in command:
-                element_name = command.replace("click on ", "").strip()
-                commands["click on"](element_name)
-
-            # Commands requiring additional input
-            elif "open application" in command:
-                app_name = command.replace("open application ", "").strip()
-                if not app_handler.open_application(app_name):
-                    app_handler.open_application_fallback(app_name)
-
-            elif "close application" in command:
-                app_name = command.replace("close application ", "").strip()
-                app_handler.close_application(app_name)
-
-            elif "set reminder" in command:
-                reminder_text = command.replace("set reminder ", "")
-                commands["set reminder"](reminder_text)
-
-            elif "web search" in command:
-                search_query = command.replace("web search ", "")
-                commands["web search"](search_query)
-
-            elif "youtube search" in command:
-                youtube_query = command.replace("youtube search ", "")
-                commands["youtube search"](youtube_query)
-
-            elif "create folder" in command:
-                folder_name = command.replace("create folder ", "").strip()
-                commands["create folder"](folder_name)
-
-            elif "delete file" in command:
-                file_name = command.replace("delete file ", "").strip()
-                commands["delete file"](file_name)
-
-            elif "move file" in command:
-                parts = command.split(" to ")
-                if len(parts) == 2:
-                    file_name = parts[0].replace("move file ", "").strip()
-                    destination = parts[1].strip()
-                    commands["move file"](file_name, destination)
-
-            elif "rename file" in command:
-                parts = command.split(" to ")
-                if len(parts) == 2:
-                    old_name = parts[0].replace("rename file ", "").strip()
-                    new_name = parts[1].strip()
-                    commands["rename file"](old_name, new_name)
-
-            elif "open website" in command:
-                website_url = command.replace("open website ", "").strip()
-                web_functions.open_website(website_url)
-
-            # Command not recognized
-            else:
-                speak_text("Command not recognized.")
-
-        except KeyError as e:
-            speak_text(f"Command key error: {str(e)}. Please try again.")
-        except TypeError as e:
-            speak_text(f"Type error occurred: {str(e)}. Please check your command format.")
-        except Exception as e:
-            speak_text(f"An error occurred: {str(e)}. Please try again.")
-
-
-

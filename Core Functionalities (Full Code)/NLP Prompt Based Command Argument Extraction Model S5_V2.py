@@ -482,7 +482,7 @@ ui_handler = UIHandler()  # Instantiate UIHandler
     
 # --*Main Code of Basic Commands*--
 
-commands = {
+general_commands = {
     "exit": lambda: speak_text("Exiting, Good bye!"),
     
     # UI Access (Click on elements)
@@ -530,118 +530,65 @@ commands = {
 
 
 #--------------------------------------------------------------------------------------------------------
+import google.generativeai as genai
 
+# Configure the API with your Gemini API key
+genai.configure(api_key="AIzaSyCiQrXmDQFOzlCRWcZdqNyVNH6k7J9BqZ8")
 
-# Load the FLAN-T5 model and tokenizer
-model_name = "google/flan-t5-base"  # You can upgrade to "flan-t5-large" if needed
-tokenizer = T5Tokenizer.from_pretrained(model_name)
-model = T5ForConditionalGeneration.from_pretrained(model_name)
+user_input = "can you open calculator"
 
-def extract_command(user_input):
-    """
-    Extract and normalize the command from the user input to match predefined commands.
-    """
-    prompt = (
-        f"You are a command extraction system. Extract the 'command' from the user input "
-        f"and ensure it matches one of the predefined commands: 'open application', 'close application'.\n\n"
-        f"Input: {user_input}\nOutput:"
-    )
-    
-    inputs = tokenizer(prompt, return_tensors="pt", max_length=512, truncation=True)
-    outputs = model.generate(inputs.input_ids, max_length=50, num_beams=5, early_stopping=True)
-    extracted_command = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    
-    # Normalize the extracted command
-    command_lower = extracted_command.lower()
-    if "open" in command_lower or "launch" in command_lower or "start" in command_lower:
-        return "open application"
-    elif (
-        "close" in command_lower
-        or "shut down" in command_lower
-        or "quit" in command_lower
-        or "exit" in command_lower
-    ):
-        return "close application"
-    else:
-        return extracted_command  # Fallback to raw output if no match
+# Define the task prompt for generating Python code
+prompt = f"""
+You are a command and argument extraction model.
+You have to extract command from {user_input}
+and also the argument from {user_input}.
+1. command must mathch the following:
+open application
+close application
+web search
+youtube search
+open website
 
+2. arguments are dynamic:
+can contain app name
+any search argument 
+and website name
 
+Now you have to return extracted command then extract argument in a single line.
+eg.
+open application chrome
+web search current global trends
+close application microsoft store
+open website youtube.com
+"""
 
+# Use the Gemini model to generate content based on the prompt
+model = genai.GenerativeModel("gemini-1.5-flash")
+response = model.generate_content(prompt)
 
-def extract_argument(user_input):
-    """
-    Extract the argument from the user input, focusing on application names.
-    Checks against a predefined list of application names first, then falls back to model extraction.
-    """
-    import re  # Use regex for better matching
+def commands_arguments_extracted():
+    print(response.text)
+    return response.text
 
-    # List of predefined application names
-    app_names = [
-        "notepad", "calculator", "paint", "wordpad",
-        "microsoft edge", "google chrome", "mozilla firefox",
-        "microsoft word", "microsoft excel", "microsoft powerpoint",
-        "vlc media player", "spotify", "adobe acrobat reader",
-        "steam", "discord", "file explorer",
-        "windows media player", "snipping tool", "task manager",
-        "command prompt", "powershell", "control panel", "settings"
-    ]
-
-    # Preprocess input for case-insensitive matching
-    user_input_lower = user_input.lower()
-
-    # Use regex to match predefined application names
-    for app in app_names:
-        if re.search(rf"\b{re.escape(app)}\b", user_input_lower):  # Ensure exact word match
-            return app  # Return the matched application name
-
-    # If no predefined app name is found, use the model to extract the argument
-    prompt = (
-        f"Extract the application or software name from the following user input. "
-        f"Prioritize matching names from this predefined list: {', '.join(app_names)}. "
-        f"If none match exactly, extract the most likely name mentioned in the input.\n\n"
-        f"User Input: {user_input}\nApplication Name:"
-    )
-
-    # Generate model inputs and outputs
-    inputs = tokenizer(prompt, return_tensors="pt", max_length=512, truncation=True)
-    outputs = model.generate(inputs.input_ids, max_length=50, num_beams=5, early_stopping=True)
-    return tokenizer.decode(outputs[0], skip_special_tokens=True)
-
-
-def Command_Argument_Combined():
-    
-    user_input = listen_command()
-    
-    predicted_command = extract_command(user_input)
-    predicted_argument = extract_argument(user_input)
-    
-    print (predicted_command +" "+ predicted_argument)
-    return predicted_command +" "+ predicted_argument
-
-
+commands_arguments_extracted()
 
 #--------------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------------
 
 # Example loop to keep listening for commands
 while True:
-    command = Command_Argument_Combined()
+    command = commands_arguments_extracted()
 
     if command:
         # Exit command to stop the loop
         if "exit" in command:
-            commands["exit"]()
+            general_commands["exit"]()
             break
 
         try:
             # Default command execution
-            if command in commands:
-                commands[command]()
-            
-            # Handle "click on" command
-            elif "click on" in command:
-                element_name = command.replace("click on ", "").strip()
-                commands["click on"](element_name)
+            if command in general_commands:
+                general_commands[command]()
 
             # Commands requiring additional input
             elif "open application" in command:
@@ -652,40 +599,6 @@ while True:
             elif "close application" in command:
                 app_name = command.replace("close application ", "").strip()
                 app_handler.close_application(app_name)
-
-            elif "set reminder" in command:
-                reminder_text = command.replace("set reminder ", "")
-                commands["set reminder"](reminder_text)
-
-            elif "web search" in command:
-                search_query = command.replace("web search ", "")
-                commands["web search"](search_query)
-
-            elif "youtube search" in command:
-                youtube_query = command.replace("youtube search ", "")
-                commands["youtube search"](youtube_query)
-
-            elif "create folder" in command:
-                folder_name = command.replace("create folder ", "").strip()
-                commands["create folder"](folder_name)
-
-            elif "delete file" in command:
-                file_name = command.replace("delete file ", "").strip()
-                commands["delete file"](file_name)
-
-            elif "move file" in command:
-                parts = command.split(" to ")
-                if len(parts) == 2:
-                    file_name = parts[0].replace("move file ", "").strip()
-                    destination = parts[1].strip()
-                    commands["move file"](file_name, destination)
-
-            elif "rename file" in command:
-                parts = command.split(" to ")
-                if len(parts) == 2:
-                    old_name = parts[0].replace("rename file ", "").strip()
-                    new_name = parts[1].strip()
-                    commands["rename file"](old_name, new_name)
 
             elif "open website" in command:
                 website_url = command.replace("open website ", "").strip()
@@ -701,6 +614,3 @@ while True:
             speak_text(f"Type error occurred: {str(e)}. Please check your command format.")
         except Exception as e:
             speak_text(f"An error occurred: {str(e)}. Please try again.")
-
-
-

@@ -1,0 +1,417 @@
+keyword,command
+
+# UI Interaction
+click,click on
+select,click on
+tap on,click on
+press,click on
+choose,click on
+touch,click on
+interact with,click on
+activate,click on
+engage,click on
+hit,click on
+
+# Application Control
+open,open application
+start,open application
+launch,open application
+run application,open application
+access app,open application
+initiate,open application
+begin,open application
+load,open application
+execute,open application
+boot,open application
+
+close,close application
+exit,close application
+shut down app,close application
+terminate,close application
+stop app,close application
+quit,close application
+end,close application
+kill,close application
+dismiss,close application
+shut off,close application
+
+# File and Folder Management
+make folder,create folder
+create directory,create folder
+new folder,create folder
+add folder,create folder
+build folder,create folder
+generate folder,create folder
+establish folder,create folder
+set up folder,create folder
+initialize folder,create folder
+construct folder,create folder
+
+remove file,delete file
+delete file,delete file
+erase file,delete file
+discard file,delete file
+get rid of file,delete file
+trash file,delete file
+destroy file,delete file
+eliminate file,delete file
+wipe file,delete file
+purge file,delete file
+
+move this,move file
+transfer file,move file
+relocate file,move file
+shift file,move file
+place file,move file
+send file,move file
+transport file,move file
+migrate file,move file
+reposition file,move file
+change location,move file
+
+rename this,rename file
+change file name,rename file
+edit file name,rename file
+update file name,rename file
+modify file name,rename file
+alter name,rename file
+adjust name,rename file
+revise name,rename file
+switch name,rename file
+change title,rename file
+
+# System Information
+battery,battery status
+check battery,battery status
+battery status,battery status
+power level,battery status
+battery health,battery status
+energy level,battery status
+power status,battery status
+charge level,battery status
+battery life,battery status
+power remaining,battery status
+
+cpu,cpu usage
+processor,cpu usage
+system load,cpu usage
+check cpu,cpu usage
+cpu status,cpu usage
+processing power,cpu usage
+cpu load,cpu usage
+processor health,cpu usage
+system resources,cpu usage
+cpu performance,cpu usage
+
+internet,internet status
+check internet,internet status
+online status,internet status
+is internet working,internet status
+network status,internet status
+connection status,internet status
+wifi status,internet status
+web connection,internet status
+internet health,internet status
+connectivity check,internet status
+
+time,current time
+current time,current time
+what time is it,current time
+tell me the time,current time
+time now,current time
+clock,current time
+present time,current time
+exact time,current time
+local time,current time
+time check,current time
+
+# Web and Browser Commands
+search,web search
+find online,web search
+google,web search
+search the web,web search
+look up,web search
+browse for,web search
+search internet,web search
+query web,web search
+find information,web search
+research online,web search
+
+youtube,youtube search
+search youtube,youtube search
+find on youtube,youtube search
+play on youtube,youtube search
+youtube search,youtube search
+watch video,youtube search
+find video,youtube search
+video search,youtube search
+browse youtube,youtube search
+stream video,youtube search
+
+email,check email
+check mail,check email
+read mail,check email
+email inbox,check email
+open email,check email
+show emails,check email
+view messages,check email
+mail status,check email
+inbox check,check email
+electronic mail,check email
+
+weather,get weather
+what's the weather,get weather
+forecast,get weather
+current weather,get weather
+weather update,get weather
+temperature,get weather
+weather info,get weather
+climate check,get weather
+weather report,get weather
+weather conditions,get weather
+
+website,open website
+visit site,open website
+go to website,open website
+browse site,open website
+open url,open website
+load page,open website
+access site,open website
+navigate to site,open website
+show website,open website
+display page,open website
+
+# System Control
+volume up,increase volume
+raise volume,increase volume
+turn up volume,increase volume
+increase sound,increase volume
+boost volume,increase volume
+amplify sound,increase volume
+louder,increase volume
+maximize volume,increase volume
+increase audio,increase volume
+heighten volume,increase volume
+
+volume down,decrease volume
+lower volume,decrease volume
+reduce volume,decrease volume
+decrease sound,decrease volume
+turn down volume,decrease volume
+softer,decrease volume
+minimize volume,decrease volume
+quiet down,decrease volume
+reduce audio,decrease volume
+lower sound,decrease volume
+
+mute,mute sound
+silence,mute sound
+turn off sound,mute sound
+mute audio,mute sound
+disable sound,mute sound
+no sound,mute sound
+quiet mode,mute sound
+zero volume,mute sound
+sound off,mute sound
+audio off,mute sound
+
+unmute,unmute sound
+enable sound,unmute sound
+turn on sound,unmute sound
+restore audio,unmute sound
+unmute audio,unmute sound
+sound on,unmute sound
+audio on,unmute sound
+restore sound,unmute sound
+reactivate sound,unmute sound
+enable audio,unmute sound
+
+sleep,sleep mode
+sleep mode,sleep mode
+put to sleep,sleep mode
+hibernate,sleep mode
+standby,sleep mode
+suspend,sleep mode
+power save,sleep mode
+rest mode,sleep mode
+energy save,sleep mode
+low power mode,sleep mode
+
+shutdown,shutdown
+turn off,shutdown
+power off,shutdown
+stop system,shutdown
+shut down computer,shutdown
+power down,shutdown
+system off,shutdown
+complete shutdown,shutdown
+full stop,shutdown
+terminate system,shutdown
+
+restart,restart
+reboot,restart
+restart system,restart
+start over,restart
+reset computer,restart
+refresh system,restart
+reload system,restart
+cycle power,restart
+quick reboot,restart
+system restart,restart
+
+# Personal Assistant
+reminder,set reminder
+set a reminder,set reminder
+remind me,set reminder
+schedule reminder,set reminder
+add reminder,set reminder
+new reminder,set reminder
+create reminder,set reminder
+future reminder,set reminder
+timed alert,set reminder
+memory prompt,set reminder
+
+joke,tell joke
+tell me a joke,tell joke
+make me laugh,tell joke
+funny story,tell joke
+humor me,tell joke
+comedy,tell joke
+entertain me,tell joke
+say something funny,tell joke
+share joke,tell joke
+tell story,tell joke
+
+date,current date
+current date,current date
+today's date,current date
+what's the date,current date
+date today,current date
+calendar date,current date
+show date,current date
+date check,current date
+day today,current date
+current day,current date
+
+# Automation and Scripting
+run,run script
+execute script,run script
+start script,run script
+run program,run script
+launch script,run script
+process script,run script
+perform script,run script
+activate script,run script
+trigger script,run script
+initiate script,run script
+
+favorite,open favorite
+open favorite,open favorite
+favorite file,open favorite
+favorite document,open favorite
+open saved,open favorite
+bookmarked item,open favorite
+saved item,open favorite
+preferred file,open favorite
+starred item,open favorite
+pinned item,open favorite
+
+# Additional Commands
+screenshot,take screenshot
+capture screen,take screenshot
+snap screen,take screenshot
+print screen,take screenshot
+save screen,take screenshot
+screen capture,take screenshot
+grab screen,take screenshot
+screen snap,take screenshot
+capture display,take screenshot
+screen image,take screenshot
+
+brightness up,increase brightness
+increase brightness,increase brightness
+make brighter,increase brightness
+lighter screen,increase brightness
+boost brightness,increase brightness
+maximize light,increase brightness
+screen brighter,increase brightness
+enhance display,increase brightness
+brighten screen,increase brightness
+increase display,increase brightness
+
+brightness down,decrease brightness
+decrease brightness,decrease brightness
+make darker,decrease brightness
+dim screen,decrease brightness
+reduce brightness,decrease brightness
+lower light,decrease brightness
+screen darker,decrease brightness
+darken display,decrease brightness
+dim display,decrease brightness
+reduce light,decrease brightness
+
+calculator,open calculator
+math,open calculator
+calculate,open calculator
+open calc,open calculator
+run calculator,open calculator
+numbers,open calculator
+computation,open calculator
+math tool,open calculator
+calculate numbers,open calculator
+math helper,open calculator
+
+translate,translate text
+translate this,translate text
+what does this mean,translate text
+interpretation,translate text
+convert language,translate text
+change language,translate text
+decode text,translate text
+explain text,translate text
+convert words,translate text
+language help,translate text
+
+meeting,start meeting
+conference,start meeting
+video call,start meeting
+start call,start meeting
+begin meeting,start meeting
+group call,start meeting
+virtual meeting,start meeting
+online meeting,start meeting
+web conference,start meeting
+team meeting,start meeting
+
+notes,take notes
+note this,take notes
+write down,take notes
+record note,take notes
+create note,take notes
+document this,take notes
+save note,take notes
+quick note,take notes
+memo this,take notes
+jot down,take notes
+
+music,play music
+play song,play music
+start music,play music
+play track,play music
+begin music,play music
+stream music,play music
+audio playback,play music
+start song,play music
+play audio,play music
+begin song,play music
+
+maps,open maps
+directions,open maps
+navigate to,open maps
+find location,open maps
+show route,open maps
+get directions,open maps
+find place,open maps
+show map,open maps
+location search,open maps
+navigation help,open maps

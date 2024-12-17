@@ -482,7 +482,7 @@ ui_handler = UIHandler()  # Instantiate UIHandler
     
 # --*Main Code of Basic Commands*--
 
-commands = {
+general_commands = {
     "exit": lambda: speak_text("Exiting, Good bye!"),
     
     # UI Access (Click on elements)
@@ -630,18 +630,13 @@ while True:
     if command:
         # Exit command to stop the loop
         if "exit" in command:
-            commands["exit"]()
+            general_commands["exit"]()
             break
 
         try:
             # Default command execution
-            if command in commands:
-                commands[command]()
-            
-            # Handle "click on" command
-            elif "click on" in command:
-                element_name = command.replace("click on ", "").strip()
-                commands["click on"](element_name)
+            if command in general_commands:
+                general_commands[command]()
 
             # Commands requiring additional input
             elif "open application" in command:
@@ -652,40 +647,6 @@ while True:
             elif "close application" in command:
                 app_name = command.replace("close application ", "").strip()
                 app_handler.close_application(app_name)
-
-            elif "set reminder" in command:
-                reminder_text = command.replace("set reminder ", "")
-                commands["set reminder"](reminder_text)
-
-            elif "web search" in command:
-                search_query = command.replace("web search ", "")
-                commands["web search"](search_query)
-
-            elif "youtube search" in command:
-                youtube_query = command.replace("youtube search ", "")
-                commands["youtube search"](youtube_query)
-
-            elif "create folder" in command:
-                folder_name = command.replace("create folder ", "").strip()
-                commands["create folder"](folder_name)
-
-            elif "delete file" in command:
-                file_name = command.replace("delete file ", "").strip()
-                commands["delete file"](file_name)
-
-            elif "move file" in command:
-                parts = command.split(" to ")
-                if len(parts) == 2:
-                    file_name = parts[0].replace("move file ", "").strip()
-                    destination = parts[1].strip()
-                    commands["move file"](file_name, destination)
-
-            elif "rename file" in command:
-                parts = command.split(" to ")
-                if len(parts) == 2:
-                    old_name = parts[0].replace("rename file ", "").strip()
-                    new_name = parts[1].strip()
-                    commands["rename file"](old_name, new_name)
 
             elif "open website" in command:
                 website_url = command.replace("open website ", "").strip()
@@ -701,6 +662,3 @@ while True:
             speak_text(f"Type error occurred: {str(e)}. Please check your command format.")
         except Exception as e:
             speak_text(f"An error occurred: {str(e)}. Please try again.")
-
-
-

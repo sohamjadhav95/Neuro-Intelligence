@@ -1,62 +1,43 @@
-from transformers import T5Tokenizer, T5ForConditionalGeneration
+import google.generativeai as genai
 
-# Load the FLAN-T5 model and tokenizer
-model_name = "google/flan-t5-base"  # You can upgrade to "flan-t5-large" if needed
-tokenizer = T5Tokenizer.from_pretrained(model_name)
-model = T5ForConditionalGeneration.from_pretrained(model_name)
+# Configure the API with your Gemini API key
+genai.configure(api_key="AIzaSyCiQrXmDQFOzlCRWcZdqNyVNH6k7J9BqZ8")
 
-def extract_command(user_input, provided_commands):
-    """
-    Extract the command from the user input based on the provided list of commands.
-    """
-    commands_list = "\n".join([f"- {cmd}" for cmd in provided_commands])
-    prompt = (
-        f"You are a command extraction system. Extract the 'command' from the user input. "
-        f"The command must match one of the following provided commands:\n{commands_list}\n\n"
-        f"Input: {user_input}\nOutput:"
-    )
-    
-    inputs = tokenizer(prompt, return_tensors="pt", max_length=512, truncation=True)
-    outputs = model.generate(inputs.input_ids, max_length=50, num_beams=5, early_stopping=True)
-    return tokenizer.decode(outputs[0], skip_special_tokens=True)
+user_input = "search cat "
 
-def extract_argument(user_input):
-    """
-    Extract the argument from the user input, ignoring predefined commands.
-    """
-    prompt = (
-        f"You are an argument extraction system. Extract the 'argument' from the user input, "
-        f"which represents the specific name of application or a software.\n\n"
-        f"Input: {user_input}\nOutput:"
-    )
-    
-    inputs = tokenizer(prompt, return_tensors="pt", max_length=512, truncation=True)
-    outputs = model.generate(inputs.input_ids, max_length=50, num_beams=5, early_stopping=True)
-    return tokenizer.decode(outputs[0], skip_special_tokens=True)
+# Define the task prompt for generating Python code
+prompt = f"""
+You are a command and argument extraction model.
+You have to extract command from {user_input}
+and also the argument from {user_input}.
+1. command must mathch the following:
+open application
+close application
+web search
+youtube search
+open website
 
-def test_command_argument_extraction():
-    """
-    Test the functions for extracting command and argument separately.
-    """
-    # List of valid commands
-    provided_commands = [
-        "open application",
-        "close application",
-        "create file",
-        "delete file"
-    ]
-    
-    # User input for testing
-    user_input = "please open the chrome app"
-    
-    # Extract command and argument separately
-    extracted_command = extract_command(user_input, provided_commands)
-    extracted_argument = extract_argument(user_input)
-    
-    # Print results
-    print("User Input:", user_input)
-    print("Extracted Command:", extracted_command)
-    print("Extracted Argument:", extracted_argument)
+2. arguments are dynamic:
+can contain any app name
+any search argument 
+and website name
 
-# Run the test
-test_command_argument_extraction()
+Now you have to return extracted command then extract argument in a single line.
+eg.
+open application chrome
+web search current global trends
+close application microsoft store
+open website youtube.com
+
+(Note: Make Sure You Are Providing The accurate Response for any command and it must stick to rules.)
+"""
+
+# Use the Gemini model to generate content based on the prompt
+model = genai.GenerativeModel("gemini-1.5-flash")
+response = model.generate_content(prompt)
+
+def commands_arguments_extracted():
+    print(response.text)
+    return response.text
+
+commands_arguments_extracted()
