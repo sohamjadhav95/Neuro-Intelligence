@@ -8,7 +8,6 @@ import speech_recognition as sr
 from transformers import T5Tokenizer, T5ForConditionalGeneration
 
 from Core_Commands import commands
-from Core_Commands import execute_command
 
 # In CoreCommands.py
 from Core_Functions import ApplicationHandler, System_control, SystemInfromation, FileHandler, WebFunctions
@@ -100,10 +99,6 @@ while True:
                 app_name = command.replace("close application ", "").strip()
                 app_handler.close_application(app_name)
 
-            elif "set reminder" in command:
-                reminder_text = command.replace("set reminder ", "")
-                commands["set reminder"](reminder_text)
-
             elif "web search" in command:
                 search_query = command.replace("web search ", "")
                 commands["web search"](search_query)
@@ -111,28 +106,6 @@ while True:
             elif "youtube search" in command:
                 youtube_query = command.replace("youtube search ", "")
                 commands["youtube search"](youtube_query)
-
-            elif "create folder" in command:
-                folder_name = command.replace("create folder ", "").strip()
-                commands["create folder"](folder_name)
-
-            elif "delete file" in command:
-                file_name = command.replace("delete file ", "").strip()
-                commands["delete file"](file_name)
-
-            elif "move file" in command:
-                parts = command.split(" to ")
-                if len(parts) == 2:
-                    file_name = parts[0].replace("move file ", "").strip()
-                    destination = parts[1].strip()
-                    commands["move file"](file_name, destination)
-
-            elif "rename file" in command:
-                parts = command.split(" to ")
-                if len(parts) == 2:
-                    old_name = parts[0].replace("rename file ", "").strip()
-                    new_name = parts[1].strip()
-                    commands["rename file"](old_name, new_name)
 
             elif "open website" in command:
                 website_url = command.replace("open website ", "").strip()

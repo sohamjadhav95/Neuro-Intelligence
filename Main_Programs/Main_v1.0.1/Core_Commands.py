@@ -40,18 +40,7 @@ commands = {
     "exit": lambda: speak_text("Exiting, Good bye!"),
     
     # UI Access (Click on elements)
-    
     "click on": lambda element_name: ui_handler.click_on(element_name),
-        
-    # Application Control
-    "open application": lambda app_name: app_handler.open_application(app_name),
-    "close application": lambda app_name: app_handler.close_application(app_name),
-
-    # File and Folder Management
-    "create folder": lambda folder_name: file_handler.create_folder(folder_name),
-    "delete file": lambda file_name: file_handler.delete_file(file_name),
-    "move file": lambda file_name, destination: file_handler.move_file(file_name, destination),
-    "rename file": lambda old_name, new_name: file_handler.rename_file(old_name, new_name),
     
     # System Information
     "battery status": lambda: system_information.get_battery_status(),
@@ -60,12 +49,9 @@ commands = {
     "current time": lambda: system_information.get_current_time(),
     
     # Web and Browser Commands
-    "web search": lambda query: web_functions.web_search(query),
-    "youtube search": lambda query: web_functions.youtube_search(query),
     "check email": lambda: web_functions.check_email(),
     "check internet": lambda: web_functions.check_internet(),
     "get weather": lambda city_name: web_functions.get_weather(city_name),
-    "open website": lambda website_url: web_functions.open_website(website_url),
   
     # System Control
     "increase volume": lambda: system_control.increase_volume(),
@@ -85,50 +71,3 @@ commands = {
     "run script": lambda script_name: speak_text(f"Running script {script_name}..."),  # Add script running code here
     "open favorite": lambda doc_name: speak_text(f"Opening {doc_name}..."),  # Add favorite document opening code here
 }
-
-
-
-# Commands Data
-
-def load_command_mapping(csv_file):
-    command_mapping = {}
-    with open(csv_file, mode='r') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            # Skip comment lines starting with #
-            if row['keyword'].startswith('#'):
-                continue
-            trigger = row['keyword'].strip()  # Changed from 'Trigger Word(s)'
-            command = row['command'].strip()  # Changed from 'Command'
-            command_mapping[trigger] = command
-    return command_mapping
-
-# Load the command mapping
-csv_file = "E:\\Projects\\Neuro-Intelligence\\Main Programs\\command_mapping.csv"
-command_mapping = load_command_mapping(csv_file)
-
-
-
-def execute_command(user_input):
-    """
-    Analyze user input, map keywords to commands, and extract arguments.
-    """
-    # Normalize user input (case-insensitive matching)
-    user_input = user_input.lower()
-
-    # Find the keyword in the user input
-    for keyword, command in command_mapping.items():
-        if user_input.startswith(keyword):
-            # Map keyword to command and extract argument
-            argument = user_input[len(keyword):].strip()
-
-            # Combine command and argument
-            full_command = f"{command} {argument}"
-            
-            print(f"Predicted Command: {full_command}")
-            
-            return full_command
-
-    # If no match is found
-    print("No matching command found.")
-    return None
