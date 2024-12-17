@@ -5,7 +5,6 @@ import pyttsx3
 import time
 
 import speech_recognition as sr
-from transformers import T5Tokenizer, T5ForConditionalGeneration
 
 from Core_Commands import commands
 
@@ -37,7 +36,8 @@ def speak_text(text):
     tts_engine.say(text)
     tts_engine.runAndWait()
     time.sleep(1)  # Short delay after speaking
-#-----------------------------------------------------------------------------------------------
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
 # Function to listen for commands
 def listen_command():
@@ -91,6 +91,10 @@ while True:
             elif "close application" in command:
                 app_name = command.replace("close application ", "").strip()
                 app_handler.close_application(app_name)
+
+            elif "set reminder" in command:
+                reminder_text = command.replace("set reminder ", "")
+                commands["set reminder"](reminder_text)
 
             elif "web search" in command:
                 search_query = command.replace("web search ", "")

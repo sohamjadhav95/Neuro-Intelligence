@@ -146,6 +146,77 @@ class ApplicationHandler:
         pyautogui.press("enter")
 
 class ApplicationHandler:
+    
+    def __init__(self):
+        pass
+
+    def open_application(self, app_name):
+        """
+        Attempts to open an application by checking a predefined dictionary and the system PATH.
+        If unsuccessful, returns False to indicate further methods should be attempted.
+        """
+        app_command = applications_paths.get(app_name)
+        if not app_command:
+            add_custom_app(app_name)
+            app_command = applications_paths.get(app_name)
+
+        if app_command:
+            try:
+                speak_text(f"Opening {app_name}...")
+                subprocess.Popen([app_command])
+                speak_text(f"{app_name} opened.")
+                return True
+            except FileNotFoundError:
+                speak_text(f"Error: Could not open {app_name}. Trying another method...")
+                return False
+
+        app_path = shutil.which(app_name.lower())
+        if app_path:
+            try:
+                speak_text(f"Opening {app_name}...")
+                subprocess.Popen([app_path])
+                return True
+            except FileNotFoundError:
+                speak_text(f"Error: Could not open {app_name}.")
+                return False
+
+        return False
+
+    def open_application_fallback(self, app_name):
+        
+        def get_voice_confirmation(retries = 3):
+            """
+            Asks the user for a yes/no confirmation via voice input with a retry mechanism.
+            """
+            for attempt in range(retries):
+                try:
+                    speak_text("Do you want to proceed? Please say yes procees or no cancel.")
+                    response = listen_command()  # Replace with your voice input capture function
+                    if response.lower() in ["yes","yes proceed", "yeah", "yep"]:
+                        return True
+                    elif response.lower() in ["no cancel", "nope"]:
+                        return False
+                    else:
+                        speak_text("I didn't catch that. Please say yes or no.")
+                except Exception as e:
+                    speak_text(f"Error: {str(e)}. Let's try again.")
+            
+            speak_text("Unable to get a clear response. Cancelling the action.")
+            return False
+        
+        """
+        Attempts to open an application using Windows Start Menu search as a fallback.
+        """
+        speak_text(f"Application not available in path, searching for {app_name} in Start Menu...")
+        pyautogui.hotkey("winleft")
+        pyautogui.write(app_name, interval=0.3)
+        
+        
+        if not get_voice_confirmation():
+            speak_text("Action cancelled.")
+            return
+        
+        pyautogui.press("enter")
     def close_application(self, app_name):
         """
         Attempts to close an application using window title search or other methods.
