@@ -56,13 +56,6 @@ def listen_command():
             print("Sorry, I could not understand the audio.")
         except sr.RequestError as e:
             print("Could not request results from Google Speech API; {0}".format(e))
-        
-        
-        
-# Load the FLAN-T5 model and tokenizer
-model_name = "google/flan-t5-base"  # You can upgrade to "flan-t5-large" if needed
-tokenizer = T5Tokenizer.from_pretrained(model_name)
-model = T5ForConditionalGeneration.from_pretrained(model_name)
 
 
 
