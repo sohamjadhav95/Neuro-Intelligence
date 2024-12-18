@@ -1,4 +1,3 @@
-
 import os
 import subprocess
 import webbrowser
@@ -339,7 +338,7 @@ class System_control:
                 speak_text("Restart cancelled.")
             else:
                 speak_text("Sorry, I didn't catch that. Please say 'yes' or 'no'.")
-
+        
 system_control = System_control()   
     
 # *System Infromation Functions*
@@ -560,3 +559,258 @@ class UIHandler:
 
 
 ui_handler = UIHandler()  # Instantiate UIHandler
+
+
+class System_Shortcuts:
+
+    # --*Window Control*--
+    def close_current_window(self):
+        """Close the current window."""
+        pyautogui.hotkey("alt", "f4")
+        speak_text("Current window closed.")
+
+    def minimize_window(self):
+        """Minimize the current window."""
+        pyautogui.hotkey("win", "down")
+        speak_text("Current window minimized.")
+
+    def maximize_window(self):
+        """Maximize the current window."""
+        pyautogui.hotkey("win", "up")
+        speak_text("Current window maximized.")
+
+    def switch_window(self):
+        """Switch to the next open window."""
+        pyautogui.hotkey("alt", "tab")
+        speak_text("Switched to the next window.")
+
+    def snap_window_left(self):
+        """Snap the current window to the left."""
+        pyautogui.hotkey("win", "left")
+        speak_text("Window snapped to the left.")
+
+    def snap_window_right(self):
+        """Snap the current window to the right."""
+        pyautogui.hotkey("win", "right")
+        speak_text("Window snapped to the right.")
+
+    # --*Application Control*--
+    def open_task_manager(self):
+        """Open Task Manager."""
+        pyautogui.hotkey("ctrl", "shift", "esc")
+        speak_text("Task Manager opened.")
+
+    def open_file_explorer(self):
+        """Open File Explorer."""
+        pyautogui.hotkey("win", "e")
+        speak_text("File Explorer opened.")
+
+    def open_command_prompt(self):
+        """Open Command Prompt."""
+        pyautogui.hotkey("win", "r")
+        pyautogui.typewrite("cmd")
+        pyautogui.press("enter")
+        speak_text("Command Prompt opened.")
+
+    def open_browser(self):
+        """Open the default web browser."""
+        pyautogui.hotkey("win", "r")
+        pyautogui.typewrite("msedge")  # Change to "chrome", "firefox", or your browser name
+        pyautogui.press("enter")
+        speak_text("Default web browser opened.")
+
+    # --*Screen Control*--
+    def take_screenshot(self):
+        """Take a screenshot."""
+        pyautogui.hotkey("win", "shift", "s")
+        speak_text("Screenshot taken.")
+
+    def toggle_full_screen(self):
+        """Toggle full-screen mode for the active application."""
+        pyautogui.hotkey("f11")
+        speak_text("Full-screen mode toggled.")
+
+    # --*Lock and Minimize*--
+    def lock_computer(self):
+        """Lock the computer."""
+        pyautogui.hotkey("win", "l")
+        speak_text("Computer locked.")
+
+    def minimize_all_windows(self):
+        """Minimize all open windows."""
+        pyautogui.hotkey("win", "d")
+        speak_text("All windows minimized.")
+
+    # --*Virtual Desktop Control*--
+    def create_virtual_desktop(self):
+        """Create a new virtual desktop."""
+        pyautogui.hotkey("win", "ctrl", "d")
+        speak_text("New virtual desktop created.")
+
+    def switch_virtual_desktop(self):
+        """Switch between virtual desktops."""
+        pyautogui.hotkey("win", "ctrl", "left")
+        speak_text("Switched to the previous virtual desktop.")
+        pyautogui.hotkey("win", "ctrl", "right")
+        speak_text("Switched to the next virtual desktop.")
+
+    # --*Settings Control*--
+    def open_settings(self):
+        """Open Windows Settings."""
+        pyautogui.hotkey("win", "i")
+        speak_text("Settings opened.")
+
+    def open_update_settings(self):
+        """Open Windows Update settings."""
+        pyautogui.hotkey("win", "i")
+        pyautogui.typewrite("update")
+        pyautogui.press("enter")
+        speak_text("Windows Update settings opened.")
+
+    def open_sound_settings(self):
+        """Open Sound Settings."""
+        pyautogui.hotkey("win", "i")
+        pyautogui.typewrite("sound")
+        pyautogui.press("enter")
+        speak_text("Sound settings opened.")
+
+    def open_bluetooth_settings(self):
+        """Open Bluetooth settings."""
+        pyautogui.hotkey("win", "i")
+        pyautogui.typewrite("bluetooth")
+        pyautogui.press("enter")
+        speak_text("Bluetooth settings opened.")
+
+    def open_wifi_settings(self):
+        """Open Wi-Fi settings."""
+        pyautogui.hotkey("win", "i")
+        pyautogui.typewrite("network status")
+        pyautogui.press("enter")
+        speak_text("Wi-Fi settings opened.")
+
+    def open_keyboard_settings(self):
+        """Open Keyboard settings."""
+        pyautogui.hotkey("win", "i")
+        pyautogui.typewrite("keyboard")
+        pyautogui.press("enter")
+        speak_text("Keyboard settings opened.")
+
+    def open_mouse_settings(self):
+        """Open Mouse settings."""
+        pyautogui.hotkey("win", "i")
+        pyautogui.typewrite("mouse")
+        pyautogui.press("enter")
+        speak_text("Mouse settings opened.")
+
+    def open_display_settings(self):
+        """Open Display settings."""
+        pyautogui.hotkey("win", "i")
+        pyautogui.typewrite("display")
+        pyautogui.press("enter")
+        speak_text("Display settings opened.")
+
+    def open_language_settings(self):
+        """Open Language settings."""
+        pyautogui.hotkey("win", "i")
+        pyautogui.typewrite("language settings")
+        pyautogui.press("enter")
+        speak_text("Language settings opened.")
+
+    def open_time_and_date_settings(self):
+        """Open Time and Date settings."""
+        pyautogui.hotkey("win", "i")
+        pyautogui.typewrite("time and date")
+        pyautogui.press("enter")
+        speak_text("Time and date settings opened.")
+
+    def open_taskbar_settings(self):
+        """Open Taskbar settings."""
+        pyautogui.hotkey("win", "i")
+        pyautogui.typewrite("taskbar")
+        pyautogui.press("enter")
+        speak_text("Taskbar settings opened.")
+
+    def open_privacy_settings(self):
+        """Open Privacy settings."""
+        pyautogui.hotkey("win", "i")
+        pyautogui.typewrite("privacy settings")
+        pyautogui.press("enter")
+        speak_text("Privacy settings opened.")
+
+    def open_storage_settings(self):
+        """Open Storage settings."""
+        pyautogui.hotkey("win", "i")
+        pyautogui.typewrite("storage")
+        pyautogui.press("enter")
+        speak_text("Storage settings opened.")
+
+    def open_apps_settings(self):
+        """Open Apps settings."""
+        pyautogui.hotkey("win", "i")
+        pyautogui.typewrite("apps")
+        pyautogui.press("enter")
+        speak_text("Apps settings opened.")
+
+    def open_power_and_sleep_settings(self):
+        """Open Power and Sleep settings."""
+        pyautogui.hotkey("win", "i")
+        pyautogui.typewrite("power and sleep")
+        pyautogui.press("enter")
+        speak_text("Power and sleep settings opened.")
+
+    def open_default_apps_settings(self):
+        """Open Default Apps settings."""
+        pyautogui.hotkey("win", "i")
+        pyautogui.typewrite("default apps")
+        pyautogui.press("enter")
+        speak_text("Default apps settings opened.")
+
+    def open_personalization_settings(self):
+        """Open Personalization settings."""
+        pyautogui.hotkey("win", "i")
+        pyautogui.typewrite("personalization")
+        pyautogui.press("enter")
+        speak_text("Personalization settings opened.")
+
+    def open_fonts_settings(self):
+        """Open Fonts settings."""
+        pyautogui.hotkey("win", "i")
+        pyautogui.typewrite("fonts")
+        pyautogui.press("enter")
+        speak_text("Fonts settings opened.")
+
+    def open_region_settings(self):
+        """Open Region settings."""
+        pyautogui.hotkey("win", "i")
+        pyautogui.typewrite("region")
+        pyautogui.press("enter")
+        speak_text("Region settings opened.")
+
+    def open_accounts_settings(self):
+        """Open Accounts settings."""
+        pyautogui.hotkey("win", "i")
+        pyautogui.typewrite("accounts")
+        pyautogui.press("enter")
+        speak_text("Accounts settings opened.")
+
+    def open_backup_settings(self):
+        """Open Backup settings."""
+        pyautogui.hotkey("win", "i")
+        pyautogui.typewrite("backup")
+        pyautogui.press("enter")
+        speak_text("Backup settings opened.")
+
+    def open_security_and_maintenance(self):
+        """Open Security and Maintenance."""
+        pyautogui.hotkey("win", "r")
+        pyautogui.typewrite("control /name Microsoft.SecurityAndMaintenance")
+        pyautogui.press("enter")
+        speak_text("Security and Maintenance opened.")
+
+    def open_feedback_hub(self):
+        """Open Feedback Hub."""
+        pyautogui.hotkey("win", "f")
+        speak_text("Feedback Hub opened.")
+
+        
+        

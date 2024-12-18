@@ -5,7 +5,7 @@ import re  # Import for cleaning text
 genai.configure(api_key="AIzaSyCiQrXmDQFOzlCRWcZdqNyVNH6k7J9BqZ8")  # Replace with your API key
 
 # User input for the desired task
-user_input = "create demo.txt file in dowenloads folder"
+user_input = "close the current opened app"
 
 # Adding a clear prompt to generate code with confirmation messages
 prompt = (
