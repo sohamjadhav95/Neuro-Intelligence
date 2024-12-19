@@ -4,7 +4,7 @@ Voice Commands: You can use voice commands to open and close applications, switc
 Number Overlays: Voice Access highlights clickable elements on the screen with number overlays, making it easier to interact with buttons, icons, menus, windows, and sliders without a mouse or keyboard.
 Text Authoring: You can dictate text into any application that accepts text input, such as Word, Outlook, or Notepad.
 Correction Commands: Voice Access includes correction commands to fix misrecognized words. You can say commands like "Correct [text]" or "Spell that" to make corrections3.
-Voice Shortcuts: You can create your own voice shortcuts for frequently used commands or sequences of actions.
++ Voice Shortcuts: You can create your own voice shortcuts for frequently used commands or sequences of actions.
 
 Additional Functionalities:
 
