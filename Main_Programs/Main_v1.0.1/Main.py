@@ -39,23 +39,35 @@ def speak_text(text):
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-# Function to listen for commands
 def listen_command():
     with sr.Microphone() as source:
-        print("Please speak now...")
-        recognizer.adjust_for_ambient_noise(source)  # Adjust for ambient noise
-        audio = recognizer.listen(source)
-
         try:
-            # Using Google Speech API (no large models to download)
+            print("Calibrating for ambient noise...")
+            recognizer.adjust_for_ambient_noise(source, duration=1)  # Calibrate for 1 second
+            print("Listening... Please speak clearly.")
+            
+            # Use a timeout for responsiveness
+            audio = recognizer.listen(source, timeout=5, phrase_time_limit=10)
+            
+            # Recognize speech
             command = recognizer.recognize_google(audio)
             print("You said:", command)
+            
+            # Text-to-speech feedback (optional)
             speak_text(f"You said: {command}")
             return command.lower()
+        
         except sr.UnknownValueError:
-            print("Sorry, I could not understand the audio.")
+            print("Sorry, I could not understand the audio. Please try again.")
+        except sr.WaitTimeoutError:
+            print("No speech detected. Please speak louder or closer to the microphone.")
         except sr.RequestError as e:
-            print("Could not request results from Google Speech API; {0}".format(e))
+            print(f"Google Speech API error: {e}")
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
+
+    return None  # Return None if no valid command is captured
+
 
 
 
@@ -64,7 +76,7 @@ def listen_command():
 
 # Example loop to keep listening for commands
 while True:
-    command = listen_command()
+    command = "open region settings"
 
     if command:
         # Exit command to stop the loop

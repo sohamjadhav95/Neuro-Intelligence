@@ -1,12 +1,23 @@
+from vosk import Model, KaldiRecognizer
+import pyaudio
+import json
 
-import pyautogui
+def listen_and_transcribe_vosk():
+    model = Model("model")  # Replace "model" with the path to your Vosk model
+    recognizer = KaldiRecognizer(model, 16000)
 
-def close_tabs():
+    # Setup microphone
+    audio = pyaudio.PyAudio()
+    stream = audio.open(format=pyaudio.paInt16, channels=1, rate=16000, input=True, frames_per_buffer=4096)
+    stream.start_stream()
 
-    try:
-        pyautogui.hotkey("ctrl", "w")  # For Windows/Linux
-        print("The current tab has been closed successfully.")
-    except Exception as e:
-        print(f"An error occurred while trying to close the tab: {e}")     
-        
-close_tabs()
+    print("Listening... Speak clearly.")
+    while True:
+        data = stream.read(4096)
+        if recognizer.AcceptWaveform(data):
+            result = json.loads(recognizer.Result())
+            print("You said:", result.get("text", ""))
+            return result.get("text", "")
+
+# Call the function
+listen_and_transcribe_vosk()
