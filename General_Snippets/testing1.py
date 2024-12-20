@@ -1,15 +1,14 @@
 
-import pyautogui
+import requests
+from bs4 import BeautifulSoup
 
-def open_update_settings():
-    """Open Windows Update settings."""
-    pyautogui.hotkey("win", "i")
-    pyautogui.sleep(1)
-    pyautogui.typewrite("update")
-    pyautogui.press("enter")
-    pyautogui.sleep(1)
-    pyautogui.press("enter")
-    print("Windows Update settings opened.")
-
-    
-open_update_settings()
+url = "https://www.amazon.com/s?k=baby+food"
+response = requests.get(url)
+soup = BeautifulSoup(response.content, 'html.parser')
+products = soup.find_all('div', class_='s-result-item')
+for product in products:
+    name_tag = product.find('span', class_='a-text-normal')
+    if name_tag:
+        name = name_tag.text.strip()
+        if "baby food" in name.lower():
+            print(name)

@@ -5,7 +5,7 @@ import re  # Import for cleaning text
 genai.configure(api_key="AIzaSyCiQrXmDQFOzlCRWcZdqNyVNH6k7J9BqZ8")  # Replace with your API key
 
 # User input for the desired task
-user_input = "open chrome app"
+user_input = "open notepad and write 5 lines about nature"
 
 # Adding a clear prompt to generate code with confirmation messages
 prompt = (
@@ -16,7 +16,7 @@ prompt = (
 )
 
 # Use the Gemini model to generate content based on the prompt
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("gemini-1.5-pro")
 response = model.generate_content(prompt)
 
 # Clean the generated code
