@@ -2,7 +2,7 @@ from transformers import T5Tokenizer, T5ForConditionalGeneration
 from difflib import get_close_matches
 
 # Load the FLAN-T5 model and tokenizer
-model_name = "google/flan-t5-large"  # You can upgrade to "flan-t5-large" if needed
+model_name = "google/flan-t5-base"  # You can upgrade to "flan-t5-large" if needed
 tokenizer = T5Tokenizer.from_pretrained(model_name)
 model = T5ForConditionalGeneration.from_pretrained(model_name)
 
@@ -74,7 +74,7 @@ def extract_argument(user_input):
     prompt = (
         f"You are an argument extraction system. Extract the 'argument' from the user input, "
         f"which represents the specific name of an application or software in the provided list.\n\n"
-        f"If application or software name does not match from list, you can extract the specific argument that is mentioned in the user input.\n\n"
+        f"If application or software name does not match from list, you can extract the specific name that is mentioned in the user input.\n\n"
         f"Input: {user_input}\nOutput:"
     )
     
