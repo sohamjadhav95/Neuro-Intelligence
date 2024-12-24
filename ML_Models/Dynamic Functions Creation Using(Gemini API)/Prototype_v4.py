@@ -5,7 +5,7 @@ import re  # Import for cleaning text
 genai.configure(api_key="AIzaSyCiQrXmDQFOzlCRWcZdqNyVNH6k7J9BqZ8")  # Replace with your API key
 
 # User input for the desired task
-user_input = "open notepad then chrome"
+user_input = "open visual studio code from start menue create file sample and write a python script for recursion example"
 
 # Adding a clear prompt to generate code with confirmation messages
 prompt = (

@@ -101,6 +101,21 @@ if __name__ == "__main__":
         "Search for climate change on the web.",
         "Go to www.example.com.",
         "Play some songs."
+        "Launch the Calculator."
+        "Please open Paint."
+        "Mute the system volume."
+        "Search Google for AI advancements."
+        "Take a screenshot now."
+        "Launch the Calculator."
+        "Please open Paint."
+        "Mute the system volume."
+        "Search Google for AI advancements."
+        "Take a screenshot now."
+        "Open the Notepad."
+        "Close all windows on my screen."
+        "Check the weather forecast for tomorrow."
+        "Increase the volume by 10 percent."
+        "Minimize all the windows."
     ]
     
     for user_input in test_inputs:

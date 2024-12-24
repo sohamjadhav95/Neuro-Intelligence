@@ -61,7 +61,7 @@ def listen_command():
 
 # Example loop to keep listening for commands
 while True:
-    command = "open notepad then chrome"
+    command = "open registry editor"
 
     if command:
         # Exit command to stop the loop

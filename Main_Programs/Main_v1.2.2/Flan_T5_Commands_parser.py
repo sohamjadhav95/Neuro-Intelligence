@@ -96,12 +96,41 @@ def process_input(user_input):
 if __name__ == "__main__":
     # Sample user inputs to test
     test_inputs = [
-        "Can you open Notepad?",
-        "Close the Spotify app.",
-        "Search for climate change on the web.",
-        "Go to www.example.com.",
-        "Play some songs."
-    ]
+    "Can you open Notepad?",
+    "Close the Spotify app.",
+    "Search for climate change on the web.",
+    "Go to www.example.com.",
+    "Play some songs.",
+    "Open Chrome browser.",
+    "Switch to the Microsoft Word application.",
+    "Open the calculator.",
+    "Mute the sound.",
+    "What is the battery status?",
+    "Increase the volume.",
+    "What is the CPU usage?",
+    "Check the internet status.",
+    "Restart the system.",
+    "Open YouTube and play a video.",
+    "Take a screenshot of the current screen.",
+    "Open the task manager.",
+    "Lock my computer.",
+    "Minimize all windows.",
+    "Open Windows Settings.",
+    "Switch to the next virtual desktop.",
+    "Check the weather for today.",
+    "Search for the latest news on climate change.",
+    "Open the file explorer.",
+    "Open the device manager.",
+    "Check my email.",
+    "Open Paint to start drawing.",
+    "Switch to the second window.",
+    "Snap the window to the left.",
+    "Open the control panel settings.",
+    "Increase the brightness on the screen.",
+    "Show me the system properties.",
+    "Open the registry editor.",
+    "Activate sleep mode."
+]
     
     for user_input in test_inputs:
         print(f"Input: {user_input}")
