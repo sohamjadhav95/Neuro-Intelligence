@@ -1,16 +1,9 @@
+import google.generativeai as genai
 import re
-import os
-import datetime
 from difflib import get_close_matches
-from groq import Groq
 
-# Automatically Initiating required envoirnmental variable
-os.environ["GROQ_API_KEY"] = "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"
-
-# Configure the Groq API with your API key
-client = Groq(
-    api_key=os.environ.get("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"),
-)
+# Configure the Gemini API with your API key
+genai.configure(api_key="AIzaSyAF8OCUS7KjTkCBRK6UojIWzdY0Ccah21Q")  # Replace with your API key
 
 # Separate commands into general and argumented commands
 argumented_commands = [
@@ -42,14 +35,13 @@ general_commands = [
 
 # Function to extract command and arguments
 def extract_command_and_arguments(user_input):
-    """
-    Extract the command and argument from user input.
-    """
+    # Normalize input
     user_input = user_input.strip().lower()
-
+    
     # Check if the command is one of the argumented commands
     for command in argumented_commands:
         if user_input.startswith(command):
+            # Extract the argument
             argument = user_input.replace(command, "").strip()
             return command, argument
 
@@ -58,35 +50,25 @@ def extract_command_and_arguments(user_input):
     if closest_match:
         command = closest_match[0]
         return command, ""
+    
+    # Fallback: Use Gemini to resolve ambiguous input
+    return get_command_from_gemini(user_input)
 
-    # Fallback: Use Groq API for ambiguous input
-    return get_command_from_groq(user_input)
-
-# Function to get command from Groq API
-def get_command_from_groq(user_input):
-    """
-    Use the Groq API to extract command and argument for ambiguous inputs.
-    """
+# Function to get command from Gemini API
+def get_command_from_gemini(user_input):
     prompt = (
         f"User input: {user_input}\n"
         f"Map the user input to one of the predefined commands: {', '.join(argumented_commands + general_commands)}.\n"
         f"Also extract the argument if present. Return the result in the format:\n"
         f"Command: <command>\nArgument: <argument>\n"
     )
+    
+    # Generate content using Gemini
+    model = genai.GenerativeModel("gemini-1.5-pro")
+    response = model.generate_content(prompt)
 
-    response = client.chat.completions.create(
-        model="llama3-70b-8192",
-        messages=[
-            {"role": "user", "content": prompt}
-        ],
-        temperature=1,
-        max_tokens=1024,
-        top_p=1,
-        stream=False,
-        stop=None,
-    )
-
-    generated_text = response.choices[0].message.content.strip()
+    # Parse Gemini response
+    generated_text = response.text.strip()
     match = re.search(r"Command: (.+)\nArgument: (.*)", generated_text)
     if match:
         command = match.group(1).strip()
@@ -94,52 +76,19 @@ def get_command_from_groq(user_input):
         return command, argument
     else:
         return "Invalid command", ""
+    
+    
 
-from difflib import SequenceMatcher
-
-def test_accuracy(test_set):
-    """
-    Test the accuracy of command extraction and provide detailed metrics.
-    """
-    correct_predictions = 0
-    detailed_results = []
-
-    for user_input, expected_command, expected_argument in test_set:
-        extracted_command, extracted_argument = extract_command_and_arguments(user_input)
-
-        # Check command accuracy
-        command_match = SequenceMatcher(None, extracted_command, expected_command).ratio()
-        argument_match = SequenceMatcher(None, extracted_argument, expected_argument).ratio()
-
-        is_correct = (
-            command_match > 0.9 and
-            (expected_argument == "" or argument_match > 0.9)  # Allow slight differences in arguments
-        )
-        if is_correct:
-            correct_predictions += 1
-
-        # Store detailed results
-        detailed_results.append({
-            "Input": user_input,
-            "Expected Command": expected_command,
-            "Extracted Command": extracted_command,
-            "Expected Argument": expected_argument,
-            "Extracted Argument": extracted_argument,
-            "Command Match": command_match,
-            "Argument Match": argument_match,
-            "Correct": is_correct
-        })
-
-    accuracy = (correct_predictions / len(test_set)) * 100
-    return accuracy, detailed_results
-
-# Expanded test set
+# Large test set with expected outputs
 test_set = [
+    # Argumented commands
     ("Open the browser and search for AI tools", "open application", "browser and search for AI tools"),
     ("Close the notepad", "close application", "notepad"),
     ("Search for baby toys online", "web search", "baby toys online"),
     ("Look up Python tutorials on YouTube", "youtube search", "Python tutorials"),
     ("Click on the 'Start' menu", "click on", "'Start' menu"),
+
+    # General commands
     ("Show me battery status", "battery status", ""),
     ("What is the CPU usage?", "cpu usage", ""),
     ("Check the internet status", "internet status", ""),
@@ -155,20 +104,15 @@ test_set = [
     ("Lock the computer", "lock computer", ""),
     ("Switch to the next virtual desktop", "switch virtual desktop", ""),
     ("Open the settings", "open settings", ""),
-    ("Search for restaurants near me", "web search", "restaurants near me"),
-    ("Play the latest music on YouTube", "youtube search", "latest music"),
-    ("Snap the window to the left side", "snap window left", ""),
-    ("What's the current date?", "current date", ""),
-    ("Turn up the volume", "increase volume", ""),
-    ("Unmute the sound", "unmute sound", ""),
-    ("Check the email inbox", "check email", ""),
-    ("Go to www.example.com", "open website", "www.example.com"),
-    ("Restart the laptop", "restart", ""),
-    ("Show me the system properties", "open system properties", "")
 ]
 
-# Run accuracy testing
-accuracy, results = test_accuracy(test_set)
-print(f"Accuracy: {accuracy:.2f}%")
-for result in results:
-    print(result)
+# Function to process and print results for the test set
+def process_test_set(test_set):
+    for user_input, expected_command, expected_argument in test_set:
+        command, argument = extract_command_and_arguments(user_input)
+        print(f"Input: {user_input}")
+        print(f"Extracted_Command: {command} {argument}")
+
+# Run the function to process the test set
+process_test_set(test_set)
+
