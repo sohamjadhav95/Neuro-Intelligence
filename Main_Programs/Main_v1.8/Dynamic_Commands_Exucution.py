@@ -17,31 +17,6 @@ def Gemini_Input(user_input):
         f"Do not add explanations or comments. Ensure the code prints the result."   
     )
 
-    '''
-    prompt = (
-        f"Write a concise Python script to {user_input}. "
-        f"The script must include meaningful confirmation messages based on the task's outcome. "
-        f"Ensure the code is executable and prints the results directly. "
-        f"Avoid comments or explanations; provide only the Python code."
-    )
-    '''
-    '''
-    # Construct a detailed prompt
-    prompt = (
-        f"You are an advanced Python code generator integrated with a voice-controlled assistant. "
-        f"Your goal is to generate **accurate, executable Python code** that fulfills the following requirements:\n"
-        f"1. Understand the user's natural language command and infer their intent.\n"
-        f"2. Handle ambiguities and ask clarifying questions where necessary.\n"
-        f"3. If the user's intent involves external systems or applications:\n"
-        f"   - Check if the system state matches the user's request (e.g., is the application running?).\n"
-        f"   - If not, provide a workaround or a graceful failure message.\n"
-        f"4. Always include necessary imports and ensure error handling.\n"
-        f"5. Include confirmation messages in the code to inform the user of success or failure.\n"
-        f"6. If execution involves specific system dependencies or configurations, add checks to guide users accordingly.\n"
-        f"\n"
-        f"Now, generate Python code for the following user command:\n{user_input}\n"
-    )
-    '''
     # Use the Gemini model to generate content based on the prompt
     model = genai.GenerativeModel("gemini-1.5-pro")
     response = model.generate_content(prompt)

@@ -1,10 +1,9 @@
 import re
 import os
-import datetime
 from difflib import get_close_matches
 from groq import Groq
 
-# Automatically Initiating required envoirnmental variable
+# Automatically Initiating required environmental variable
 os.environ["GROQ_API_KEY"] = "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"
 
 # Configure the Groq API with your API key
@@ -12,7 +11,7 @@ client = Groq(
     api_key=os.environ.get("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"),
 )
 
-# Separate commands into general and argumented commands
+# Predefined commands
 argumented_commands = [
     "open application", "close application", "web search", "youtube search", "open website",
     "click on"
@@ -47,6 +46,10 @@ def extract_command_and_arguments(user_input):
     """
     user_input = user_input.strip().lower()
 
+    # Check for word count limit
+    if len(user_input.split()) > 4:
+        return "Invalid command", ""
+
     # Check if the command is one of the argumented commands
     for command in argumented_commands:
         if user_input.startswith(command):
@@ -54,19 +57,25 @@ def extract_command_and_arguments(user_input):
             return command, argument
 
     # Match the input to a general command
-    closest_match = get_close_matches(user_input, general_commands, n=1, cutoff=0.6)
+    closest_match = get_close_matches(user_input, general_commands, n=1, cutoff=0.8)
     if closest_match:
         command = closest_match[0]
         return command, ""
 
     # Fallback: Use Groq API for ambiguous input
-    return get_command_from_groq(user_input)
+    command, argument = get_command_from_groq(user_input)
+    if command.lower() not in (cmd.lower() for cmd in argumented_commands + general_commands):
+        return "Invalid command", ""
+
+    return command, argument
 
 # Function to get command from Groq API
 def get_command_from_groq(user_input):
     """
     Use the Groq API to extract command and argument for ambiguous inputs.
+    Validates the output against predefined commands and handles invalid inputs.
     """
+    # Generate the Groq API prompt
     prompt = (
         f"User input: {user_input}\n"
         f"Map the user input to one of the predefined commands: {', '.join(argumented_commands + general_commands)}.\n"
@@ -74,37 +83,49 @@ def get_command_from_groq(user_input):
         f"Command: <command>\nArgument: <argument>\n"
     )
 
-    response = client.chat.completions.create(
-        model="llama3-70b-8192",
-        messages=[
-            {"role": "user", "content": prompt}
-        ],
-        temperature=1,
-        max_tokens=1024,
-        top_p=1,
-        stream=False,
-        stop=None,
-    )
+    # Call the Groq API
+    try:
+        response = client.chat.completions.create(
+            model="llama3-70b-8192",
+            messages=[
+                {"role": "user", "content": prompt}
+            ],
+            temperature=1,
+            max_tokens=1024,
+            top_p=1,
+            stream=False,
+            stop=None,
+        )
+    except Exception as e:
+        print(f"Error with Groq API: {e}")
+        return "Invalid command", ""
 
+    # Parse the response
     generated_text = response.choices[0].message.content.strip()
     match = re.search(r"Command: (.+)\nArgument: (.*)", generated_text)
     if match:
         command = match.group(1).strip()
         argument = match.group(2).strip()
-        
-        # Remove "None" if it appears in command or argument
+
+        # Validate against predefined commands
+        all_commands = [cmd.lower() for cmd in argumented_commands + general_commands]
+        if command.lower() not in all_commands:
+            return "Invalid command", ""
+
+        # Clean up "None" values in command or argument
         if command.lower() == "none":
             command = ""
         if argument.lower() == "none":
             argument = ""
-            
-            
-        print(command, argument)
+
+        print (command, argument)
         return command, argument
     else:
+        # Handle unexpected format in Groq response
+        print(f"Unexpected Groq API response: {generated_text}")
         return "Invalid command", ""
 
 
 
-a = "I want to see sound settings"
-get_command_from_groq(a)
+print(extract_command_and_arguments("close the file explorer"))
+

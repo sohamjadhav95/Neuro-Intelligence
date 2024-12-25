@@ -9,6 +9,7 @@ import speech_recognition as sr
 from Core_Commands import commands
 
 from Dynamic_Commands_Exucution import Gemini_Input
+from Groq_Commands_Parser import extract_command_and_arguments ,get_command_from_groq
 
 # In CoreCommands.py
 from Core_Functions import ApplicationHandler, WebFunctions
@@ -61,7 +62,7 @@ def listen_command():
 
 # Example loop to keep listening for commands
 while True:
-    command = "open registry editor"
+    command = listen_command()
 
     if command:
         # Exit command to stop the loop
@@ -70,42 +71,48 @@ while True:
             break
 
         try:
+            # Extract command and arguments using get_command_from_groq
+            extracted_command, argument = extract_command_and_arguments(command)
+
+            # Check for invalid or blank commands
+            if not extracted_command or extracted_command == "Invalid command":
+                speak_text("Invalid command or no input detected. Please try again.")
+                speak_text("Performing Operation...")
+                Gemini_Input(command)
+                continue
+
             # Default command execution
-            if command in commands:
-                commands[command]()
-            
+            if extracted_command in commands:
+                if argument:
+                    commands[extracted_command](argument)
+                else:
+                    commands[extracted_command]()
+
             # Handle "click on" command
-            elif "click on" in command:
-                element_name = command.replace("click on ", "").strip()
-                commands["click on"](element_name)
+            elif "click on" in extracted_command:
+                commands["click on"](argument)
 
             # Commands requiring additional input
-            elif "open application" in command:
-                app_name = command.replace("open application ", "").strip()
-                if not app_handler.open_application(app_name):
-                    app_handler.open_application_fallback(app_name)
+            elif extracted_command == "open application":
+                if not app_handler.open_application(argument):
+                    app_handler.open_application_fallback(argument)
 
-            elif "close application" in command:
-                app_name = command.replace("close application ", "").strip()
-                app_handler.close_application(app_name)
+            elif extracted_command == "close application":
+                app_handler.close_application(argument)
 
-            elif "web search" in command:
-                search_query = command.replace("web search ", "")
-                commands["web search"](search_query)
+            elif extracted_command == "web search":
+                commands["web search"](argument)
 
-            elif "youtube search" in command:
-                youtube_query = command.replace("youtube search ", "")
-                commands["youtube search"](youtube_query)
+            elif extracted_command == "youtube search":
+                commands["youtube search"](argument)
 
-            elif "open website" in command:
-                website_url = command.replace("open website ", "").strip()
-                web_functions.open_website(website_url)
+            elif extracted_command == "open website":
+                web_functions.open_website(argument)
 
             # Command not recognized
             else:
                 speak_text("Performing Operation...")
                 Gemini_Input(command)
-                
 
         except KeyError as e:
             speak_text(f"Command key error: {str(e)}. Please try again.")
@@ -113,3 +120,4 @@ while True:
             speak_text(f"Type error occurred: {str(e)}. Please check your command format.")
         except Exception as e:
             speak_text(f"An error occurred: {str(e)}. Please try again.")
+
