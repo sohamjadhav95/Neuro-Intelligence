@@ -2,7 +2,7 @@ import google.generativeai as genai
 import re  # Import for cleaning text
 
 # Configure the API with your Gemini API key
-genai.configure(api_key="AIzaSyCiQrXmDQFOzlCRWcZdqNyVNH6k7J9BqZ8")  # Replace with your API key
+genai.configure(api_key="AIzaSyBHzC6HBUW36d9ZIIZEa1Wy30vx7bgchuY")  # Replace with your API key
 
 def Gemini_Input(user_input):
 
@@ -18,7 +18,7 @@ def Gemini_Input(user_input):
     )
 
     # Use the Gemini model to generate content based on the prompt
-    model = genai.GenerativeModel("gemini-1.5-pro")
+    model = genai.GenerativeModel("gemini-1.5-flash")
     response = model.generate_content(prompt)
 
     # Clean the generated code

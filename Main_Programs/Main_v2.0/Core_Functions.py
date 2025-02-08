@@ -39,43 +39,25 @@ def speak_text(text):
     time.sleep(1)  # Short delay after speaking
 #-----------------------------------------------------------------------------------------------
 
-# Function to continuously listen for a trigger word
-def listen_for_trigger():
+# Function to listen for commands
+def listen_command():
     with sr.Microphone() as source:
-        recognizer.adjust_for_ambient_noise(source)  # Adjust for background noise
-        print("Waiting for trigger word...")
-        while True:
-            try:
-                audio = recognizer.listen(source, timeout=None)  # No timeout for trigger word
-                command = recognizer.recognize_google(audio).lower()
-                print("You said:", command)
-                return command
-            except sr.UnknownValueError:
-                print("Could not understand the trigger word.")
-            except sr.RequestError as e:
-                print(f"Could not request results from Google Speech API; {e}")
+        print("Please speak now...")
+        recognizer.pause_threshold = 1
+        recognizer.adjust_for_ambient_noise(source, duration=1)  # Adjust for ambient noise
+        audio = recognizer.listen(source, 10, 7)
 
-
-# Function to listen for main commands
-def listen_command(timeout=10):
-    with sr.Microphone() as source:
-        print("Listening for commands...")
-        start_time = time.time()
-        while time.time() - start_time < timeout:
-            try:
-                audio = recognizer.listen(source, timeout=timeout)
-                command = recognizer.recognize_google(audio).lower()
-                print("Command received:", command)
-                return command
-            except sr.WaitTimeoutError:
-                print("No command detected within the timeout period.")
-                return None
-            except sr.UnknownValueError:
-                print("Sorry, I could not understand the command.")
-            except sr.RequestError as e:
-                print(f"Could not request results from Google Speech API; {e}")
-        return None
-
+        try:
+            # Using Google Speech API (no large models to download)
+            command = recognizer.recognize_google(audio, language= 'en-in')
+            print("You said:", command)
+            speak_text(f"You said: {command}")
+            return command.lower()
+        except sr.UnknownValueError:
+            print("Sorry, I could not understand the audio.")
+        except sr.RequestError as e:
+            print("Could not request results from Google Speech API; {0}".format(e))
+  
         
 # Try to open via Start Menu
 def search_windows_search_bar(query):
@@ -88,79 +70,6 @@ def search_windows_search_bar(query):
 
 
 # *Application Handling*
-
-
-class ApplicationHandler:
-    def __init__(self):
-        pass
-
-    def open_application(self, app_name):
-        """
-        Attempts to open an application by checking a predefined dictionary and the system PATH.
-        If unsuccessful, returns False to indicate further methods should be attempted.
-        """
-        app_command = applications_paths.get(app_name)
-        if not app_command:
-            add_custom_app(app_name)
-            app_command = applications_paths.get(app_name)
-
-        if app_command:
-            try:
-                speak_text(f"Opening {app_name}...")
-                subprocess.Popen([app_command])
-                speak_text(f"{app_name} opened.")
-                return True
-            except FileNotFoundError:
-                speak_text(f"Error: Could not open {app_name}. Trying another method...")
-                return False
-
-        app_path = shutil.which(app_name.lower())
-        if app_path:
-            try:
-                speak_text(f"Opening {app_name}...")
-                subprocess.Popen([app_path])
-                return True
-            except FileNotFoundError:
-                speak_text(f"Error: Could not open {app_name}.")
-                return False
-
-        return False
-
-    def open_application_fallback(self, app_name):
-        
-        def get_voice_confirmation(retries = 3):
-            """
-            Asks the user for a yes/no confirmation via voice input with a retry mechanism.
-            """
-            for attempt in range(retries):
-                try:
-                    speak_text("Do you want to proceed? Please say yes procees or no cancel.")
-                    response = listen_command()  # Replace with your voice input capture function
-                    if response.lower() in ["yes","yes proceed", "yeah", "yep"]:
-                        return True
-                    elif response.lower() in ["no cancel", "nope"]:
-                        return False
-                    else:
-                        speak_text("I didn't catch that. Please say yes or no.")
-                except Exception as e:
-                    speak_text(f"Error: {str(e)}. Let's try again.")
-            
-            speak_text("Unable to get a clear response. Cancelling the action.")
-            return False
-        
-        """
-        Attempts to open an application using Windows Start Menu search as a fallback.
-        """
-        speak_text(f"Application not available in path, searching for {app_name} in Start Menu...")
-        pyautogui.hotkey("winleft")
-        pyautogui.write(app_name, interval=0.3)
-        
-        
-        if not get_voice_confirmation():
-            speak_text("Action cancelled.")
-            return
-        
-        pyautogui.press("enter")
 
 class ApplicationHandler:
     
@@ -201,26 +110,6 @@ class ApplicationHandler:
 
     def open_application_fallback(self, app_name):
         
-        def get_voice_confirmation(retries = 3):
-            """
-            Asks the user for a yes/no confirmation via voice input with a retry mechanism.
-            """
-            for attempt in range(retries):
-                try:
-                    speak_text("Do you want to proceed? Please say yes procees or no cancel.")
-                    response = listen_command()  # Replace with your voice input capture function
-                    if response.lower() in ["yes","yes proceed", "yeah", "yep"]:
-                        return True
-                    elif response.lower() in ["no cancel", "nope"]:
-                        return False
-                    else:
-                        speak_text("I didn't catch that. Please say yes or no.")
-                except Exception as e:
-                    speak_text(f"Error: {str(e)}. Let's try again.")
-            
-            speak_text("Unable to get a clear response. Cancelling the action.")
-            return False
-        
         """
         Attempts to open an application using Windows Start Menu search as a fallback.
         """
@@ -228,12 +117,9 @@ class ApplicationHandler:
         pyautogui.hotkey("winleft")
         pyautogui.write(app_name, interval=0.3)
         
-        
-        if not get_voice_confirmation():
-            speak_text("Action cancelled.")
-            return
-        
         pyautogui.press("enter")
+
+        
     def close_application(self, app_name):
         """
         Attempts to close an application using window title search or other methods.
