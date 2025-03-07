@@ -9,7 +9,7 @@ import speech_recognition as sr
 from Core_Commands import commands
 
 from Dynamic_Commands_Exucution import Groq_Input
-from Groq_Commands_Parser import extract_command_and_arguments ,get_command_from_groq
+from Groq_Commands_Parser import get_command_from_groq
 from Core_Functions import listen_command, speak_text
 
 # In CoreCommands.py
@@ -63,7 +63,9 @@ def listen_command():
 
 # Example loop to keep listening for commands
 while True:
-    command = input("Enter command: ")
+    user_input = "Open vs code create a new file and write a code for calulator in python"
+
+    command = get_command_from_groq(user_input)
 
     if command:
         # Exit command to stop the loop
@@ -72,43 +74,36 @@ while True:
             break
 
         try:
-            # Extract command and arguments using get_command_from_groq
-            extracted_command, argument = extract_command_and_arguments(command)
-
-            # Check for invalid or blank commands
-            if not extracted_command or extracted_command == "Invalid command":
-                speak_text("Command is complex or not trained, Using another approch.")
-                speak_text("Performing Operation...")
-                Groq_Input(command)
-                continue
-
             # Default command execution
-            if extracted_command in commands:
-                if argument:
-                    commands[extracted_command](argument)
-                else:
-                    commands[extracted_command]()
-
+            if command in commands:
+                commands[command]()
+            
             # Handle "click on" command
-            elif "click on" in extracted_command:
-                commands["click on"](argument)
+            elif "click on" in command:
+                element_name = command.replace("click on ", "").strip()
+                commands["click on"](element_name)
 
             # Commands requiring additional input
-            elif extracted_command == "open application":
-                if not app_handler.open_application(argument):
-                    app_handler.open_application_fallback(argument)
+            elif "open application" in command:
+                app_name = command.replace("open application ", "").strip()
+                if not app_handler.open_application(app_name):
+                    app_handler.open_application_fallback(app_name)
 
-            elif extracted_command == "close application":
-                app_handler.close_application(argument)
+            elif "close application" in command:
+                app_name = command.replace("close application ", "").strip()
+                app_handler.close_application(app_name)
 
-            elif extracted_command == "web search":
-                commands["web search"](argument)
+            elif "web search" in command:
+                search_query = command.replace("web search ", "")
+                commands["web search"](search_query)
 
-            elif extracted_command == "youtube search":
-                commands["youtube search"](argument)
+            elif "youtube search" in command:
+                youtube_query = command.replace("youtube search ", "")
+                commands["youtube search"](youtube_query)
 
-            elif extracted_command == "open website":
-                web_functions.open_website(argument)
+            elif "open website" in command:
+                website_url = command.replace("open website ", "").strip()
+                web_functions.open_website(website_url)
 
             # Command not recognized
             else:

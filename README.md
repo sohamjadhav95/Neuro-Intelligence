@@ -13,4 +13,5 @@ For Commands Parsing (Comamnds Mapping).
 4. We Have to change the DYNAMIC FUNCTION OR CODE GENERATION Model To More Precise And Accurate Model.
 
 5. MODEL CHANGED FOR DYNAMIC FUNCTION OR CODE GENERATION: Currently we are using 
-"llama-3.2-90b-vision-preview" With GROQ API.
+"deepseek-r1-distill-llama-70b" With GROQ API.
+
