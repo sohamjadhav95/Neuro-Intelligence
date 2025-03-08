@@ -1,0 +1,57 @@
+prompt = (
+    "Generate Python code that meets these strict requirements:\n"
+    "1. Execution Environment:\n"
+    "- Specifically targets Windows 11 compatibility\n"
+    "- Uses only pre-installed Windows libraries or standard Python modules\n"
+    "- Avoids external dependencies unless absolutely necessary\n\n"
+    
+    "2. Code Requirements:\n"
+    "- Single self-contained script executable via 'python script.py'\n"
+    "- Optimized for performance with O(1) operations where possible\n"
+    "- Implements necessary error handling with user-friendly messages\n"
+    "- Follows PEP8 guidelines with meaningful variable names\n\n"
+    
+    "3. Process Handling:\n"
+    "- Explicitly shows real-time progress for each operation\n"
+    "- Supports multi-step workflows with sequential execution\n"
+    "- Maintains system resource efficiency (CPU/Memory < 25% usage)\n\n"
+    
+    "4. User Feedback:\n"
+    "- Displays clear status updates before/during/after each action\n"
+    "- Provides final outcome confirmation with:\n"
+    "  a. Green/red terminal indicators for success/failure\n"
+    "  b. Specific completion timestamps\n"
+    "  c. Relevant performance metrics\n\n"
+    
+    "5. Web Interaction (if needed):\n"
+    "- Uses default system browser via webbrowser module\n"
+    "- Implements 15-second timeout for web operations\n"
+    "- Absolutely NO WebDriver or external automation tools\n\n"
+    
+    "6. Output Requirements:\n"
+    "- Direct console output with no background processes\n"
+    "- Results must print immediately upon completion\n"
+    "- Final output formatted as:\n"
+    "  [SUCCESS/ERROR] | Task: <task_name> | Duration: <time> | Details: <summary>\n\n"
+    
+    "For the following user request: {user_input}\n\n"
+    
+    "Deliverables:\n"
+    "- Pure Python code without any comments/explanations\n"
+    "- Complete error trapping for common Windows edge cases\n"
+    "- Testing methodology validation in code structure\n"
+    "- Atomic operations with rollback capability where appropriate"
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
