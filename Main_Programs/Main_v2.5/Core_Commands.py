@@ -42,7 +42,7 @@ def speak_text(text):
 commands = {
     "exit": lambda: speak_text("Exiting, Good bye!"),
 
-    "write text": lambda query: ui_handler.write_text(query),
+    "write text": lambda text: ui_handler.write_text(text),
 
     # Main General Functiosn
     "web search": lambda query: web_functions.web_search(query),

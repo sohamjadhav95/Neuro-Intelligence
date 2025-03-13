@@ -70,9 +70,9 @@ def execute_task_plan(task_json):
             
             elif "write text" in action:
                 text_to_write = parameters.get("text", "").strip()
+                print(f"Text to write: {text_to_write}")  # Debugging line
                 ui_handler.write_text(text_to_write)
 
-            
             else:
                 print(f"[ERROR] Unknown command: {action}. Attempting to generate dynamically...")
                 generate_function(action)

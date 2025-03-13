@@ -396,9 +396,9 @@ class UIHandler:
     def __init__(self):
         pass
 
-    def write_text(self, text_to_write):
+    def write_text(self, text):
         """Simulates typing the given text."""
-        pyautogui.write(text_to_write, interval=0.05)  # Adjust interval for typing speed
+        pyautogui.write(text, interval=0.05)  # Adjust interval for typing speed
 
     def ocr_click_on_text(self, target_text):
         # Capture the screen
@@ -469,6 +469,13 @@ class UIHandler:
 ui_handler = UIHandler()  # Instantiate UIHandler
 
 
+
+if __name__ == "__main__":
+    app = "Notepad"
+    ApplicationHandler.open_application(app)
+    text_to_write = "How are you"
+    ui_handler.write_text(text_to_write)
+    print("Text has been written.")
 
 
 
