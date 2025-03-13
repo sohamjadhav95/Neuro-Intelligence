@@ -2,6 +2,9 @@ import time
 import csv
 import pyttsx3
 
+import sys
+sys.path.append(r"E:\Projects\Neuro-Intelligence\Main_Programs\Main_v2.5")
+
 # In CoreCommands.py
 from Core_Functions import ApplicationHandler, System_control, SystemInfromation, FileHandler, WebFunctions
 from Core_Functions import WebFunctions, UIHandler
@@ -34,12 +37,17 @@ def speak_text(text):
     time.sleep(1)  # Short delay after speaking
 
 
-
-
 # --*Main Code of Basic Commands*--
 
 commands = {
     "exit": lambda: speak_text("Exiting, Good bye!"),
+
+    "write text": lambda query: ui_handler.write_text(query),
+
+    # Main General Functiosn
+    "web search": lambda query: web_functions.web_search(query),
+    "youtube search": lambda query: web_functions.youtube_search(query),
+    "open website": lambda url: web_functions.open_website(url),
     
     # UI Access (Click on elements)
     "click on": lambda element_name: ui_handler.click_on(element_name),

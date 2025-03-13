@@ -8,7 +8,7 @@ client = Groq(api_key="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"
 # Predefined commands
 argumented_actions = [
     "open application", "close application", "web search", "youtube search", "open website",
-    "click on"
+    "click on", "write text"
 ]
 
 general_actions = [

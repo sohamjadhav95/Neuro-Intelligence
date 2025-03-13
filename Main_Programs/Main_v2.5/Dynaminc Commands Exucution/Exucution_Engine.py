@@ -1,6 +1,30 @@
 import json
-from Core_Commands import *
+import sys
 from task_planning import *
+from Function_Generation import *
+
+sys.path.append(r"E:\Projects\Neuro-Intelligence\Main_Programs\Main_v2.5")
+from Core_Commands import *
+
+
+'''
+# Function to listen for commands
+def listen_command():
+    with sr.Microphone() as source:
+        print("Please speak now...")
+        recognizer.adjust_for_ambient_noise(source)  # Adjust for ambient noise
+        audio = recognizer.listen(source)
+
+        try:
+            # Using Google Speech API (no large models to download)
+            command = recognizer.recognize_google(audio)
+            print("You said:", command)
+            return command.lower()
+        except sr.UnknownValueError:
+            print("Sorry, I could not understand the audio.")
+        except sr.RequestError as e:
+            print("Could not request results from Google Speech API; {0}".format(e))
+'''
 
 def execute_task_plan(task_json):
     try:
@@ -43,10 +67,19 @@ def execute_task_plan(task_json):
                 website_url = parameters.get("url", "").strip()
                 if hasattr(web_functions, "open_website"):
                     web_functions.open_website(website_url)
+            
+            elif "write text" in action:
+                text_to_write = parameters.get("text", "").strip()
+                ui_handler.write_text(text_to_write)
 
             
             else:
-                print(f"[ERROR] Unknown command: {action}")
+                print(f"[ERROR] Unknown command: {action}. Attempting to generate dynamically...")
+                generate_function(action)
+                if action in globals():
+                    globals()[action](**parameters)
+                else:
+                    print(f"[ERROR] Failed to generate and execute function: {action}")
     
     except json.JSONDecodeError as e:
         print(f"[ERROR] Invalid JSON format: {e}")

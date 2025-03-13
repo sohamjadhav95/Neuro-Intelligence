@@ -188,7 +188,7 @@ class System_Shortcuts:
     # --*Screen Control*--
     def take_screenshot(self):
         """Take a screenshot."""
-        pyautogui.hotkey("win", "shift", "s")
+        pyautogui.hotkey("win", "prtsc")
         speak_text("Screenshot taken.")
 
     def toggle_full_screen(self):

@@ -396,6 +396,10 @@ class UIHandler:
     def __init__(self):
         pass
 
+    def write_text(self, text_to_write):
+        """Simulates typing the given text."""
+        pyautogui.write(text_to_write, interval=0.05)  # Adjust interval for typing speed
+
     def ocr_click_on_text(self, target_text):
         # Capture the screen
         screenshot = ImageGrab.grab()
