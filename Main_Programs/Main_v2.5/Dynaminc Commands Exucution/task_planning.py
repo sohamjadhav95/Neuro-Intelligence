@@ -38,6 +38,7 @@ def generate_task_plan(user_input: str) -> dict:
     prompt = (
         f"User input: {user_input}\n"
         f"Refer these exact action names that are avilable. Parametric actions: {argumented_actions}, Non-Parametric actions: {general_actions}"
+        f"If the action is not avilable then Directly return user input as an action"
         f"Break down the command into a structured step-by-step plan in JSON format.\n"
         f"Each step should have an action and parameters. Use the format:\n"
         f"{{ \"task\": \"Execute multi-step operation\", \"steps\": [\n"

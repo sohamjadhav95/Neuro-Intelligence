@@ -43,7 +43,7 @@ def execute_task_plan(task_json):
                         commands[action]()
                 except TypeError:
                     print(f"[ERROR] Invalid arguments for command: {action}")
-            
+          
             elif "open application" in action:
                 app_name = parameters.get("application", "").strip()
                 if not app_handler.open_application(app_name):
@@ -75,11 +75,7 @@ def execute_task_plan(task_json):
 
             else:
                 print(f"[ERROR] Unknown command: {action}. Attempting to generate dynamically...")
-                generate_function(action)
-                if action in globals():
-                    globals()[action](**parameters)
-                else:
-                    print(f"[ERROR] Failed to generate and execute function: {action}")
+                execute_direct_code_generation(user_input)
     
     except json.JSONDecodeError as e:
         print(f"[ERROR] Invalid JSON format: {e}")
