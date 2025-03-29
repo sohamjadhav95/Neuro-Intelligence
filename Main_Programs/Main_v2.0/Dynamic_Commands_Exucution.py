@@ -32,7 +32,8 @@ def analyze_task(user_input):
         match = re.match(r'^\d+\.\s+(.+)$', line)
         if match:
             steps.append(match.group(1).strip())
-    
+
+    print (steps)
     return steps
 
 
@@ -41,13 +42,13 @@ def execute_direct_code_generation(user_input):
     """Fall back to the original direct code generation approach"""
     prompt = (
         f"Generate Python code to: {user_input}.\n"
-        f"This is Analysis of task: {analyze_task(user_input)} "
+        #f"This is Analysis of task: {analyze_task(user_input)} "
         f"User wants to execute this code to complete the activity on a Windows device.\n"
         f"Understand the user's intent and ensure it will complete in code.\n"
         f"Code must be oriented and compatible to execute on Windows 11.\n"
         f"Code must be efficient and fast to execute.\n"
         f"Some tasks may include more than one step process, so make sure the code is compatible to perform multiple steps.\n"
-        f"Each process must be visible and show what is happening, not just run in the background.\n"
+        #f"Each process must be visible and show what is happening, not just run in the background.\n"
         f"Ensure the code is executable and prints the code directly.\n"
         f"For web commands, do not use WebDriver. Open and use the browser that is set as the system default.\n"
         f"Do not add explanations or comments."
@@ -56,7 +57,7 @@ def execute_direct_code_generation(user_input):
     completion = client.chat.completions.create(
         model="qwen-2.5-coder-32b",
         messages=[{"role": "user", "content": prompt}],
-        temperature=0.6,
+        temperature=0.5,
         max_tokens=4096,
         top_p=0.95,
         stream=False,
@@ -100,7 +101,7 @@ def Fallback_If_Error(e, prompt, user_input, generated_code):
     completion = client.chat.completions.create(
         model="deepseek-r1-distill-llama-70b",
         messages=[{"role": "user", "content": prompt_modified}],
-        temperature=0.6,
+        temperature=0.8,
         max_tokens=4096,
         top_p=0.95,
         stream=False,
@@ -137,7 +138,7 @@ if __name__ == "__main__":
     
     # Test 1: Simple task
     print("Test 1: Simple task")
-    test_input = " open browser search for toys take screenshot and show me."
+    test_input = "click on sunny"
     execute_direct_code_generation(test_input)
     print("\n" + "="*50 + "\n")
 

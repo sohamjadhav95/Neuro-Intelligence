@@ -1,119 +1,110 @@
-# The code uses the 'speech_recognition' library to convert speech to text.
-# The code uses the 'pyttsx3' library to convert text to speech.
+import pandas as pd
+import joblib
+import os
+from autogluon.tabular import TabularPredictor
 
-import pyttsx3
-import time
-
-import speech_recognition as sr
-
-from Core_Commands import commands
-
-from Dynamic_Commands_Exucution import Groq_Input
-from Groq_Commands_Parser import get_command_from_groq
-from Core_Functions import listen_command, speak_text
-
-# In CoreCommands.py
-from Core_Functions import ApplicationHandler, WebFunctions
-
-# Instantiate where needed:
-app_handler = ApplicationHandler()
-web_functions = WebFunctions()
-
-
-
-# Initialize the recognizer and TTS engine
-recognizer = sr.Recognizer()
-tts_engine = pyttsx3.init('sapi5')
-
-# Set properties for TTS engine (optional)
-voices = tts_engine.getProperty('voices')
-tts_engine.setProperty('voices', voices[0].id) # Voice for chat
-tts_engine.setProperty('rate', 200)  # Speed of speech
-tts_engine.setProperty('volume', 0.9)  # Volume level (0.0 to 1.0)
-
-# Function to speak text
-def speak_text(text):
-    tts_engine.say(text)
-    tts_engine.runAndWait()
-    time.sleep(1)  # Short delay after speaking
-
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
-
-# Function to listen for commands
-def listen_command():
-    with sr.Microphone() as source:
-        print("Please speak now...")
-        recognizer.adjust_for_ambient_noise(source)  # Adjust for ambient noise
-        audio = recognizer.listen(source)
-
-        try:
-            # Using Google Speech API (no large models to download)
-            command = recognizer.recognize_google(audio)
-            print("You said:", command)
-            return command.lower()
-        except sr.UnknownValueError:
-            print("Sorry, I could not understand the audio.")
-        except sr.RequestError as e:
-            print("Could not request results from Google Speech API; {0}".format(e))
-
-
-
-#--------------------------------------------------------------------------------------------------------
-#--------------------------------------------------------------------------------------------------------
-
-# Example loop to keep listening for commands
-while True:
-    user_input = "Open vs code create a new file and write a code for calulator in python"
-
-    command = get_command_from_groq(user_input)
-
-    if command:
-        # Exit command to stop the loop
-        if "exit" in command:
-            commands["exit"]()
+def test_heart_disease_prediction():
+    """
+    A simple debug script to test heart disease prediction directly
+    without the complex UI or preprocessing pipeline.
+    """
+    # Hard-coded values for a known sample
+    test_data = {
+        'age': 62,
+        'sex': 0,
+        'cp': 0,
+        'trestbps': 138,
+        'chol': 294,
+        'fbs': 1,
+        'restecg': 1,
+        'thalach': 106,
+        'exang': 0,
+        'oldpeak': 1.9,
+        'slope': 1,
+        'ca': 3,
+        'thal': 2
+    }
+    
+    # Create DataFrame
+    df = pd.DataFrame([test_data])
+    print("\n=== Test Input Data ===")
+    print(df)
+    
+    # Load the model - try different possible target column names
+    possible_target_names = ['target', 'target_1', 'label']
+    predictor = None
+    
+    for target_name in possible_target_names:
+        model_dir = f"./autogluon_model_{target_name}"
+        if os.path.exists(model_dir):
+            print(f"Found model with target column: {target_name}")
+            predictor = TabularPredictor.load(model_dir)
             break
-
-        try:
-            # Default command execution
-            if command in commands:
-                commands[command]()
+    
+    if predictor is None:
+        print("No model found. Please make sure a model has been trained.")
+        return
+    
+    # Get model metadata
+    print("\n=== Model Information ===")
+    print(f"Problem type: {predictor.problem_type}")
+    print(f"Required features: {predictor.feature_metadata.get_features()}")
+    
+    # Get training data information
+    training_info = predictor.info()
+    print(f"Model fit time: {training_info.get('fit_time')} seconds")
+    print(f"Model accuracy: {training_info.get('val_score')}")
+    
+    # Check if we need to preprocess the data
+    # For simplicity, let's assume the model was trained on the raw data
+    # In reality, we should inspect some training samples to check format
+    
+    # Make direct prediction (bypassing preprocessing)
+    raw_prediction = None
+    try:
+        raw_prediction = predictor.predict(df)
+        print("\n=== Direct Model Prediction ===")
+        print(f"Raw prediction: {raw_prediction}")
+        print(f"Raw prediction type: {type(raw_prediction)}")
+        
+        # Get the single value
+        if isinstance(raw_prediction, pd.Series):
+            prediction_value = raw_prediction.iloc[0]
+        else:
+            prediction_value = raw_prediction[0]
             
-            # Handle "click on" command
-            elif "click on" in command:
-                element_name = command.replace("click on ", "").strip()
-                commands["click on"](element_name)
-
-            # Commands requiring additional input
-            elif "open application" in command:
-                app_name = command.replace("open application ", "").strip()
-                if not app_handler.open_application(app_name):
-                    app_handler.open_application_fallback(app_name)
-
-            elif "close application" in command:
-                app_name = command.replace("close application ", "").strip()
-                app_handler.close_application(app_name)
-
-            elif "web search" in command:
-                search_query = command.replace("web search ", "")
-                commands["web search"](search_query)
-
-            elif "youtube search" in command:
-                youtube_query = command.replace("youtube search ", "")
-                commands["youtube search"](youtube_query)
-
-            elif "open website" in command:
-                website_url = command.replace("open website ", "").strip()
-                web_functions.open_website(website_url)
-
-            # Command not recognized
-            else:
-                speak_text("Performing Operation...")
-                Groq_Input(command)
-
-        except KeyError as e:
-            speak_text(f"Command key error: {str(e)}. Please try again.")
-        except TypeError as e:
-            speak_text(f"Type error occurred: {str(e)}. Please check your command format.")
+        # Handle boolean type conversion
+        if isinstance(prediction_value, bool):
+            prediction_value = int(prediction_value)
+            
+        print(f"Final prediction value: {prediction_value}")
+        print(f"Prediction value type: {type(prediction_value)}")
+    except Exception as e:
+        print(f"Error making direct prediction: {e}")
+    
+    # Try prediction with transform for regression problems
+    if predictor.problem_type == 'regression' and raw_prediction is not None:
+        try:
+            # Check if we have scalers for inverse transform
+            scaler_path = "scalers.pkl"
+            if os.path.exists(scaler_path):
+                scalers = joblib.load(scaler_path)
+                print("\n=== Available Scalers ===")
+                print(list(scalers.keys()))
+                
+                # Assuming target name is one of the above tested names
+                for target_name in possible_target_names:
+                    if target_name in scalers:
+                        scaler = scalers[target_name]
+                        pred_value = prediction_value
+                        transformed_pred = scaler.inverse_transform([[pred_value]])[0][0]
+                        print(f"Inverse transformed prediction: {transformed_pred}")
         except Exception as e:
-            speak_text(f"An error occurred: {str(e)}. Please try again.")
+            print(f"Error with inverse transformation: {e}")
+    
+    return raw_prediction
 
+
+if __name__ == "__main__":
+    print("==== Heart Disease Prediction Debug Tool ====")
+    test_heart_disease_prediction()

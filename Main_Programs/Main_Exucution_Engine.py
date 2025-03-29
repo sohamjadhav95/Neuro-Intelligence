@@ -1,12 +1,14 @@
-import json
 import sys
+sys.path.append(r"E:\Projects\Neuro-Intelligence\Main_Programs\Main_v2.7 Rag and Other Improvemts\Core_Processes")
+sys.path.append(r"E:\Projects\Neuro-Intelligence\Main_Programs\Main_v2.7 Rag and Other Improvemts\Dynaminc_Commands_Exucution")
+sys.path.append(r"E:\Projects\Neuro-Intelligence\Main_Programs\Main_v2.7 Rag and Other Improvemts\Retrival_Agumented_Generation")
+
+import json
 import speech_recognition as sr
+from Core_Commands import *
 from task_planning import *
 from Function_Generation import *
-
-
-sys.path.append(r"E:\Projects\Neuro-Intelligence\Main_Programs\Main_v2.5")
-from Core_Commands import *
+from rag_command_parser import basic_rag
 
 recognizer = sr.Recognizer()
 
@@ -93,8 +95,9 @@ def execute_task_plan(task_json):
 if __name__ == "__main__":
     while True:
         user_input = input("Enter Input: ")
-        if user_input:
-            task_plan = generate_task_plan(user_input)
+        Modified_Input = basic_rag(user_input)
+        if Modified_Input:
+            task_plan = generate_task_plan(Modified_Input)
             execute_task_plan(json.dumps(task_plan))
         else:
             print("No valid command received. Please try again.")
