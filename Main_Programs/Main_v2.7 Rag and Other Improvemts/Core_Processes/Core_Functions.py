@@ -115,7 +115,7 @@ class ApplicationHandler:
         """
         speak_text(f"Application not available in path, searching for {app_name} in Start Menu...")
         pyautogui.hotkey("winleft")
-        pyautogui.write(app_name, interval=0.3)
+        pyautogui.write(f"a{app_name}", interval=0.3)
         
         pyautogui.press("enter")
 
