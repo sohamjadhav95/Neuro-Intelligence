@@ -2,7 +2,7 @@ import re
 from groq import Groq
 
 # Configure the Groq API with your API key
-client = Groq(api_key="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")
+client = Groq(api_key="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")
 
 def execute_direct_code_generation(user_input):
     """Fall back to the original direct code generation approach"""
@@ -21,7 +21,7 @@ def execute_direct_code_generation(user_input):
     )
 
     completion = client.chat.completions.create(
-        model="qwen-2.5-coder-32b",
+        model="deepseek-r1-distill-llama-70b",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.5,
         max_tokens=4096,

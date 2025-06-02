@@ -3,7 +3,7 @@ import os
 import json
 from groq import Groq
 # Configure the Groq API client
-client = Groq(api_key="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")
+client = Groq(api_key="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")
 
 # Predefined commands
 argumented_actions = [
@@ -50,7 +50,7 @@ def generate_task_plan(user_input: str) -> dict:
    
     try:
         response = client.chat.completions.create(
-            model="deepseek-r1-distill-qwen-32b",
+            model="deepseek-r1-distill-llama-70b",
             messages=[{"role": "user", "content": prompt}],
             temperature=1,
             max_tokens=1024

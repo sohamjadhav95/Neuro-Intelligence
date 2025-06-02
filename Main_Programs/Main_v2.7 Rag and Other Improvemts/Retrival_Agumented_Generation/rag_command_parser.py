@@ -3,7 +3,7 @@ from groq import Groq
 import pandas as pd
 import os
 
-client = Groq(api_key="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")
+client = Groq(api_key="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")
 
 CSV_FILE = r"E:\Projects\Neuro-Intelligence\Main_Programs\Main_v2.7 Rag and Other Improvemts\Retrival_Agumented_Generation\commands_database.csv"
 
