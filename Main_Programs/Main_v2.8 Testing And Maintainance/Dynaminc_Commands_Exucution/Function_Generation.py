@@ -2,12 +2,8 @@ import re
 import os
 from groq import Groq
 
-# Get API key from environment variable - REQUIRED for security
-api_key = os.getenv('GROQ_API_KEY')
-if not api_key:
-    print("ERROR: GROQ_API_KEY environment variable not set!")
-    print("Please set your Groq API key: export GROQ_API_KEY='your_api_key_here'")
-    exit(1)
+# Get API key from environment variable for security
+api_key = os.getenv('GROQ_API_KEY', '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')
 
 # Configure the Groq API with your API key
 try:
