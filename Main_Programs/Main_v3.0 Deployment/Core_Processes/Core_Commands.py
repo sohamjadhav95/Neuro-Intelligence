@@ -9,9 +9,8 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(current_dir)
 
 # In CoreCommands.py
-from Core_Functions import ApplicationHandler, System_control, SystemInfromation, FileHandler, WebFunctions
-from Core_Functions import WebFunctions, UIHandler
-from System_Shortcut_Functions import System_Shortcuts
+from Core_Processes.Core_Functions import ApplicationHandler, System_control, SystemInfromation, FileHandler, WebFunctions, UIHandler
+from Core_Processes.System_Shortcut_Functions import System_Shortcuts
 
 # Instantiate where needed:
 app_handler = ApplicationHandler()

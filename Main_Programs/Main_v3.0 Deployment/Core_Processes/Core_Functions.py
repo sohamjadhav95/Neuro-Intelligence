@@ -19,7 +19,7 @@ from pywinauto.application import Application
 from pywinauto import findwindows
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 
-from app_paths import applications_paths, add_custom_app
+from Core_Processes import app_paths
 
 
 # Initialize the recognizer and TTS engine

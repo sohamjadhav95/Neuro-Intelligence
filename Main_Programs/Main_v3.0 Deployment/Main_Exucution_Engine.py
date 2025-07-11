@@ -9,11 +9,11 @@ sys.path.append(os.path.join(current_dir, "Retrival_Agumented_Generation"))
 
 import json
 import speech_recognition as sr
-from Core_Commands import *
-from task_planning import *
-from Function_Generation import *
-from rag_command_parser import basic_rag
-from rag_command_parser import generate_natural_processing_output
+from Core_Processes.Core_Commands import *
+from Dynaminc_Commands_Exucution.task_planning import *
+from Dynaminc_Commands_Exucution.Function_Generation import *
+from Retrival_Agumented_Generation.rag_command_parser import basic_rag
+from Retrival_Agumented_Generation.rag_command_parser import generate_natural_processing_output
 import pyttsx3
 from groq import Groq
 import re
